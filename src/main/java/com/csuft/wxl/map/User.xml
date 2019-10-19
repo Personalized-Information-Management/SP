@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csuft.wxl.map.UserMap">
+	<select id="selectAll" resultType="User">
+		SELECT * FROM user;
+	</select>
+	<select id="selectPasswordByUser_idUser_per"
+		parameterType="User" resultType="String">
+		select user_pwd from user where
+		id=#{id} and user_per=#{user_per}
+	</select>
+	<select id="selectUser_nameByUser_idUser_per" parameterType="User" resultType="String">
+		select name from  (select id,student_name name,student_per per from  student union select id,teacher_name name,teacher_per per from  teacher) user1 where user1.id=#{id} and user1.per=#{user_per}
+	</select>
+</mapper>

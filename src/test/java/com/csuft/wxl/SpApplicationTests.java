@@ -1,5 +1,7 @@
 package com.csuft.wxl;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.csuft.wxl.map.CourseMap;
 import com.csuft.wxl.map.UserMap;
 import com.csuft.wxl.pojo.Course;
 import com.csuft.wxl.pojo.User;
+import com.csuft.wxl.service.UserService;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.csv.CsvData;
@@ -30,18 +34,36 @@ public class SpApplicationTests {
 	UserMap userMap;
 	@Autowired
 	CourseMap courseMap;
-
-//	@Test
-	public void contextLoads() {
-		List<User> list = userMap.selectAll();
-		JSON json = JSON.parseObject(list.toString());
-		System.out.println(json);
+	@Autowired
+	UserService userService;
+	@Test
+	public void name1() {
+		User user=new User();
+		user.setId("1");
+		user.setUser_per("3");
+		String name=userService.getName(user);
+		if (name==null) {
+			System.out.println("name==null");
+		}else if(name.equals("")){
+			System.out.println("name.equals(\"\")");
+		}
+		System.out.println("\n"+name+"\n");
 	}
+//	@Test
+	public void name() {
+		User user=new User();
+		user.setId("1");
+		user.setUser_per("2");
+		user.setUser_pwd(userService.getPassword(user));
+		System.out.println(user);
+		
+	}
+
 
 //	@Test
 	public void contextLoads1() {
 		List<User> list = userMap.selectAll();
-		JSON json = JSON.parseObject(list.toString());
+		String json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
 		System.out.println(json);
 	}
 
@@ -69,7 +91,7 @@ public class SpApplicationTests {
 
 	static int a = 0;
 
-	@Test
+//	@Test
 	public void fun1() {
 		List<Course> list = getList();
 		for (Course course : list) {
