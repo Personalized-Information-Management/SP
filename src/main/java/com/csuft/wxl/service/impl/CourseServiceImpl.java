@@ -1,25 +1,27 @@
 package com.csuft.wxl.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.csuft.wxl.map.CourseMap;
 import com.csuft.wxl.map.UserMap;
+import com.csuft.wxl.pojo.Course;
 import com.csuft.wxl.pojo.User;
+import com.csuft.wxl.service.CourseService;
 import com.csuft.wxl.service.UserService;
+
 @Service
-public class UserServiceImpl implements UserService{
+public class CourseServiceImpl implements CourseService {
+
 	@Autowired
-	UserMap userMap;
+	CourseMap courseMap;
+
 	@Override
-	public String getPassword(User user) {
+	public List<Course> getAllList() {
 		// TODO Auto-generated method stub
-		return userMap.selectPasswordByUser_idUser_per(user);
+		return courseMap.selectAll();
 	}
-	@Override
-	public String getName(User user) {
-		// TODO Auto-generated method stub
-		return userMap.selectUser_nameByUser_idUser_per(user);
-	}
-	
 
 }

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>首页</title>
+</head>
+<body>
+	<div>
+		<a href="/logins">切换用户</a>
+	</div>
+	<div>
+		<a href="/logout">退出当前用户</a>
+	</div>
+
+	<div>
+		<a href="/zhuye">主页</a>
+	</div>
+
+	<div>
+		<a href="/course">课程</a>
+	</div>
+
+	name：<%=request.getSession().getAttribute("name")%>
+	id：<%=request.getSession().getAttribute("id")%>
+	per：<%=request.getSession().getAttribute("per").equals("1") ? "学生" : "教师"%>
+</body>
+</html>

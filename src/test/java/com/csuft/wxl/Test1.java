@@ -17,7 +17,7 @@ import cn.hutool.core.text.csv.CsvUtil;
 import cn.hutool.core.util.CharsetUtil;
 
 public class Test1 {
-	public static void main(String[] args) {
+	public static void main12(String[] args) {
 		Course course=getOne();
 		System.out.println(course);
 	}
