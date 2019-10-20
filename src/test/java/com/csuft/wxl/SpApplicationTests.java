@@ -1,7 +1,5 @@
 package com.csuft.wxl;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,7 @@ import com.csuft.wxl.map.CourseMap;
 import com.csuft.wxl.map.UserMap;
 import com.csuft.wxl.pojo.Course;
 import com.csuft.wxl.pojo.User;
+import com.csuft.wxl.service.CourseService;
 import com.csuft.wxl.service.UserService;
 
 import cn.hutool.core.io.FileUtil;
@@ -36,34 +35,46 @@ public class SpApplicationTests {
 	CourseMap courseMap;
 	@Autowired
 	UserService userService;
+	@Autowired
+	CourseService courseService;
 	@Test
+	public void name2() {
+		List<Course> list=courseService.getAllList();
+		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+		for (Course course : list) {
+			System.out.println(course.toString());
+			
+		}
+	}
+
+//	@Test
 	public void name1() {
-		User user=new User();
+		User user = new User();
 		user.setId("1");
 		user.setUser_per("3");
-		String name=userService.getName(user);
-		if (name==null) {
+		String name = userService.getName(user);
+		if (name == null) {
 			System.out.println("name==null");
-		}else if(name.equals("")){
+		} else if (name.equals("")) {
 			System.out.println("name.equals(\"\")");
 		}
-		System.out.println("\n"+name+"\n");
+		System.out.println("\n" + name + "\n");
 	}
+
 //	@Test
 	public void name() {
-		User user=new User();
+		User user = new User();
 		user.setId("1");
 		user.setUser_per("2");
 		user.setUser_pwd(userService.getPassword(user));
 		System.out.println(user);
-		
-	}
 
+	}
 
 //	@Test
 	public void contextLoads1() {
 		List<User> list = userMap.selectAll();
-		String json = JSON.toJSONString(list,SerializerFeature.DisableCircularReferenceDetect);
+		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
 		System.out.println(json);
 	}
 
