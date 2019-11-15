@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csuft.wxl.map.DiscussMap">
+	<!-- 获取所有帖子按照时间戳排序 -->
+	<select id="selectAll" resultType="Discuss">
+		SELECT * FROM sp.dis order by
+		dis_time;
+	</select>
+	<resultMap type="Discuss" id="DiscussAllAutor">
+		<id column="id" property="id" />
+		<result column="dis_auto" property="dis_auto" />
+		<result column="dis_per" property="dis_per" />
+		<result column="dis_title" property="dis_title" />
+		<result column="dis_time" property="dis_time" />
+		<result column="dis_content" property="dis_content" />
+		<result column="author_name" property="author_name" />
+		<result column="author_photo" property="author_photo" />
+	</resultMap>
+	<select id="selectAllDisAndAuthor" resultMap="DiscussAllAutor">
+		(select
+		dis.id,dis_auto,dis_per,dis_title,dis_time,dis_content,student_name
+		author_name,seudent_photo author_photo from dis join student on
+		dis.dis_auto=student.id and dis.dis_per=1 )
+		union
+		(select
+		dis.id,dis_auto,dis_per,dis_title,dis_time,dis_content,teacher_name
+		author_name,teacher_photo author_photo from dis join teacher on
+		dis.dis_auto=teacher.id and dis.dis_per=2) order by dis_time desc
+	</select>
+
+	<insert id="insertOne" parameterType="Discuss">
+		insert into `dis`
+		(`dis_auto`, `dis_per`, `dis_title`, `dis_time`, `dis_content`) values
+		(#{dis_auto},#{dis_per},#{dis_title},#{dis_time},#{dis_content})
+	</insert>
+
+</mapper>

@@ -4,15 +4,57 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.csuft.wxl.map.CourseMap">
-	<resultMap type="NameIdTeacher" id="Course">
-		<>
+	<resultMap type="Course" id="CourseList">
+		<id column="id" property="id" />
+		<result column="course_name" property="course_name" />
+		<result column="teacher_name" property="course_teacher_name" />
+		<result column="course_photo" property="course_photo" />
+	</resultMap>
+	<resultMap type="Course" id="CourseCollect">
+		<id column="id" property="id" />
+		<result column="course_time" property="course_time" />
+		<result column="course_name" property="course_name" />
+		<result column="course_introduce" property="course_introduce" />
+		<result column="course_photo" property="course_photo" />
+		<result column="teacher_name" property="course_teacher_name" />
 	</resultMap>
 	<select id="selectAll" resultType="Course">
 		SELECT * FROM course;
 	</select>
-	<select id="selectCourse_idCourse_nameCourse_teacher"
-		resultMap="">
-se
+	<select id="selectAllIdTeacherName" resultMap="CourseList">
+		select
+		course.id,course_name,teacher_name,course_photo from course join
+		teacher on course.course_teacher=teacher.id
+	</select>
+	<!-- 更具课程id获取课程的信息 -->
+	<select id="selectCollect" resultMap="CourseCollect"
+		parameterType="Course">
+		SELECT
+		course.id,course_time,course_name,course_introduce,course_photo,teacher_name
+		FROM sp.course join teacher where course.course_teacher=teacher.id and
+		course.id=#{id}
+	</select>
+	<!-- 更具id获取收藏的人数 -->
+	<select id="selectCourseCollect" resultType="String"
+		parameterType="Course">
+		SELECT count(course_id) collect FROM student_course
+		where course_id=#{id} and
+		collect=1
+	</select>
+	<!-- 更具id获取学习的人数 -->
+	<select id="selectCourseStudy" resultType="String"
+		parameterType="Course">
+		SELECT count(course_id) collect FROM student_course
+		where course_id=#{id} and
+		(study=1 or study=2)
+	</select>
+
+	<!-- 更具课程id和学生id判断是否学习 -->
+	<select id="selectOnStudy" resultType="String"
+		parameterType="Student">
+		SELECT count(course_id) collect FROM student_course
+		where course_id=#{id} and
+		(study=1 or study=2)
 	</select>
 	<insert id="insertOne" parameterType="Course">
 		insert into course(id,

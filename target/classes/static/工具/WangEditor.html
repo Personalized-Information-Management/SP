@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+    <script src="../wangEditor/wangEditor.js"></script>
+    <style>
+        iframe {
+            width: 500px;
+            height: 600px;
+
+        }
+
+        .text {
+            height: 600px;
+            /* min-height:60px; */
+        }
+
+        .toolbar {
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div id="div1" class="toolbar">
+        </div>
+        <hr>
+        <div id="div2" class="text">
+            <!--可使用 min-height 实现编辑区域自动增加高度-->
+            <a href="/images/myw3schoolimage.jpg" download="w3logo">
+                <p>请输入内容</p>
+            </a>
+        </div>
+        <button class="btn bg-primary" @click="change">添加图片</button>
+        <button class="btn bg-primary" @click="addContent">添加视频</button>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+
+
+
+
+
+
+
+
+        <button class="btn bg-primary" @click="change">获取内容</button>
+        <button class="btn bg-primary" @click="addContent">追加内容</button>
+        <button class="btn bg-primary" @click="addView">追加视频</button>
+        <button class="btn bg-primary" @click="clear">清空</button>
+        <br>
+
+        <img src="成功.png" alt="" style="max-width:10%;">
+        <br>
+        {{text}}：
+        {{html}}
+    </div>
+
+    <script>
+        var E = window.wangEditor
+        var editor = new E('#div1', '#div2');
+        var app = new Vue({
+            el: "#app",
+            data: {
+                html: '',
+                text: '文本'
+            },
+            methods: {
+                change: function () {
+                    this.html = editor.txt.html();
+                },
+                setContent: function () {
+                    editor.txt.html('<p>用 JS 设置的内容</p>');
+                },
+                addContent: function () {
+                    editor.txt.append('<img src="成功.png" alt=""><br>');
+                },
+                addView: function () {
+                    editor.txt.append('<iframe src="123.mp4" style frameborder="0"></iframe><br>');
+                },
+                clear: function () {
+                    editor.txt.clear()
+                }
+            },
+        });
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'emoticon',  // 表情
+            'image',  // 插入图片
+            'table',  // 表格
+            // 'video',  // 插入视频
+            // 'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+        ]
+        editor.create();
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

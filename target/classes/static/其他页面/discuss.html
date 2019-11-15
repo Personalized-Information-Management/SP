@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>讨论区</title>
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <!--注意引入css文件用link-->
+    <script scr="/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <link href="/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!--vue.js-->
+    <script src="/js/vue.js"></script>
+    <!--axios.js-->
+    <script src="/js/axios.min.js"></script>
+    <style>
+        .box {
+            border: 1px solid red;
+        }
+
+        .flo {
+            display: block;
+            float: right;
+        }
+
+        .wang-col-1 {
+            display: inline;
+        }
+
+        .wang-col-2 {
+            display: none;
+        }
+
+
+        @media(max-width: 576px) {
+            .wang-col-1 {
+                display: none;
+            }
+
+            .wang-col-2 {
+                display: inline;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <div>
+        <div class="container">
+            <br>
+            <a href="/zhuye">
+                <p><i><strong>个性化学习平台</strong></i></p>
+            </a>
+        </div>
+        <div class="container-fluid bg-info text-white">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
+                    <a class="navbar-brand">&nbsp;</a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                        data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="true"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse show" id="collapsibleNavId">
+                        <div class="container ">
+                            <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/zhuye">主页</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/course">课程</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">作业</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">成长</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">教师通知</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">讨论区</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">活动</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="/logins">切换账号</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link " href="/logout">退出登录</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div id="app" class="container">
+        <div class="row">
+            <!-- 个人信息 -->
+            <table class="col-sm-2 wang-col-1 offset-1">
+                <tbody>
+                    <tr>
+                        <td class="flo">
+                            <img :src="seudent_photo" onerror="javascript:this.src='/images/student/1.png'"
+                                class="mr-0 rounded-circle" style="width: 60px; height: 60px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="flo">
+                            <div class="">姓名：{{student_name}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="flo">
+                            <p class="">账号：{{id}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 搜索栏 -->
+            <div class="col-sm-9 wang-col-1">
+                <br>
+                <br>
+                <div class="row  justify-content-center">
+                    <input type="text" class="input-medium col-sm-8 search-query">
+                    <button class="btn btn-primary mx-2">搜索</button>
+                    <img data-toggle="modal" data-target="#myModal" src="/img/addnote.png" width="40px"
+                        class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                        alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 ">
+                <table class="col-0 col-sm-12 wang-col-1">
+                    <tbody>
+                        <tr>
+                            <td class="row justify-content-end ">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active"><img src="/img/课程.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">收件箱&nbsp;&nbsp;&nbsp;</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row justify-content-end ">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active"><img src="/img/作业1.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">课程讨论</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row justify-content-end ">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active"><img src="/img/教师.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">回复我的</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row justify-content-end ">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active  "><img src="/img/课程.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">我发表的</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 当屏幕宽度小于576px时显示 -->
+            <div class="wang-col-2">
+                <table class="offset-3">
+                    <tbody>
+                        <tr>
+                            <td class="">
+                                <img :src="seudent_photo" onerror="javascript:this.src='/images/student/1.png'"
+                                    class="mr-0 " class="mr-0 rounded-circle" style="width: 60px; height: 60px;">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flo">
+                                <div class="">姓名：{{student_name}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="flo">
+                                <p class="">账号：{{id}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 链接 -->
+                <table class="offset-1 col-12">
+                    <tbody>
+                        <tr>
+                            <td class="row col-12 justify-content-end ">
+                                <ol class="breadcrumb col-12">
+                                    <li class="breadcrumb-item active"><img src="/img/课程.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">收件箱&nbsp;&nbsp;&nbsp;</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row col-12 justify-content-end ">
+                                <ol class="breadcrumb col-12">
+                                    <li class="breadcrumb-item active"><img src="/img/作业1.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">课程讨论</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row col-12 justify-content-end ">
+                                <ol class="breadcrumb col-12">
+                                    <li class="breadcrumb-item active"><img src="/img/教师.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">回复我的</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="row col-12 justify-content-end ">
+                                <ol class="breadcrumb col-12">
+                                    <li class="breadcrumb-item active  "><img src="/img/课程.png"
+                                            class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="" style="width: 30px; height: 30px;"></li>
+                                    <li class="breadcrumb-item"><a href="#">我发表的</a></li>
+                                </ol>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 搜索栏 -->
+                <div class="row offset-1 mt-1">
+                    <input type="text" class="input-medium search-query">
+                    <button class="btn btn-primary mx-2">搜索</button>
+                    <img src="/img/addnote.png" width="40px"
+                        class="img-fluid \${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                        alt="">
+                </div>
+            </div>
+
+            <!-- 段子区 -->
+            <div class=" col-sm-9">
+                <!-- 一条用户信息 -->
+                <div v-for="item in items">
+                    <div class="card">
+                        <div class="card-header">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img :src="item.author_photo"
+                                            onerror="javascript:this.src='/images/student/1.png'" alt="John Doe"
+                                            class="rounded-circle mr-3 "
+                                            style="width: 60px; height: 60px;border-radius: 1px soild red;">
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div>{{item.author_name}}</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <small>{{item.dis_time|timeTransform}}</small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <div @click="deleteItem">
+                                            <div style="display: none;">{{item.id}}</div>
+                                            <span v-if="item.dis_auto==id&&student_per==item.dis_per"
+                                                class="col-6 text-primary" style="cursor: pointer;">删除</span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            <div data-mrc>
+                                <h5 class="card-title" v-html="item.dis_title"></h5>
+                                <p class="card-text" v-html="item.dis_content"></p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div class="row">
+                                <div class="col-sm-xs-10">
+                                </div>
+                                <div class="col-sm-xs-1">
+                                    <img src="/img/点赞1.png" alt="dianzan" class="mr-3 "
+                                        style="width: 30px; height: 30px;">
+                                </div>
+                                <div class="col-sm-xs-1">
+                                    <img src="/img/讨论区1.png" alt="comment" class="mr-3 "
+                                        style="width: 30px; height: 30px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //讨论区内容
+        var data = [{ "author_name": "黑夜里的冷分", "author_photo": "/images/student/1.png", "dis_auto": "2", "dis_content": "<p>你的世界</p>", "dis_per": "1", "dis_time": "1573574963586", "dis_title": "我的世界", "id": "15" }, { "author_name": "黑夜里的冷分", "author_photo": "/images/student/1.png", "dis_auto": "2", "dis_content": "<p>是谁的谁</p>", "dis_per": "1", "dis_time": "1573574952062", "dis_title": "你说你的我说我的", "id": "14" }, { "author_name": "黑夜里的冷分", "author_photo": "/images/student/1.png", "dis_auto": "2", "dis_content": "<p>你的世界</p>", "dis_per": "1", "dis_time": "1573574924559", "dis_title": "我的世界", "id": "13" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p>我的世界</p>", "dis_per": "1", "dis_time": "1573543020452", "dis_title": "我的世界", "id": "12" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p>这是学习的第二天</p>", "dis_per": "1", "dis_time": "1573543008406", "dis_title": "学习", "id": "11" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p>学习的第一天</p>", "dis_per": "1", "dis_time": "1573542856152", "dis_title": "这是第一天", "id": "10" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p>占个位置</p>", "dis_per": "1", "dis_time": "1573179574", "dis_title": "谁是谁的谁", "id": "5" }, { "author_name": "赵六", "author_photo": "1234", "dis_auto": "1", "dis_content": "<p>1+1=?</p>", "dis_per": "2", "dis_time": "1573179574", "dis_title": "1+1=?", "id": "7" }, { "author_name": "赵六", "author_photo": "1234", "dis_auto": "1", "dis_content": "<p>1+1=?</p>", "dis_per": "2", "dis_time": "1573179574", "dis_title": "1+1=?", "id": "8" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p style=\"margin-left:28px;text-indent:43px\"><span style=\"font-size:16px\">大数据（big data）是指无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产，“大数据”是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力来适应海量、高增长率和多样化的信息资产，大数据是一种规模大到在获取、存储、管理、分析方面大大超出了传统数据库软件工具能力范围的数据集合，具有海量的数据规模、快速的</span><span style=\"font-size:16px;font-family:宋体;color:black;letter-spacing:3px\">数据流转、多样的数据类型和价值密度低四大特征。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "大数据是什么", "id": "1" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势一：数据的资源化</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">何为资源化，是指大数据成为企业和社会关注的重要战略资源，并已成为大家争相抢夺的新焦点。因而，企业必须要提前制定大数据营销战略计划，抢占市场先机。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势二：与云计算的深度结合</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据离不开云处理，云处理为大数据提供了弹性可拓展的基础设备，是产生大数据的平台之一。自2013年开始，大数据技术已开始和云计算技术紧密结合，预计未来两者关系将更为密切。除此之外，物联网、移动互联网等新兴计算形态，也将一齐助力大数据革命，让大数据营销发挥出更大的影响力。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势三：科学理论的突破</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">随着大数据的快速发展，就像计算机和互联网一样，大数据很有可能是新一轮的技术革命。随之兴起的数据挖掘、机器学习和人工智能等相关技术，可能会改变数据世界里的很多算法和基础理论，实现科学技术上的突破。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势四：数据科学和数据联盟的成立</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">未来，数据科学将成为一门专门的学科，被越来越多的人所认知。各大高校将设立专门的数据科学类专业，也会催生一批与之相关的新的就业岗位。与此同时，基于数据这个基础平台，也将建立起跨领域的数据共享平台，之后，数据共享将扩展到企业层面，并且成为未来产业的核心一环。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势五：数据泄露泛滥</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">未来几年数据泄露事件的增长率也许会达到100%，除非数据在其源头就能够得到安全保障。可以说，在未来，每个财富500强企业都会面临数据攻击，无论他们是否已经做好安全防范。而所有企业，无论规模大小，都需要重新审视今天的安全定义。在财富500强企业中，超过50%将会设置首席信息安全官这一职位。企业需要从新的角度来确保自身以及客户数据，所有数据在创建之初便需要获得安全保障，而并非在数据保存的最后一个环节，仅仅加强后者的安全措施已被证明于事无补。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势六：数据管理成为核心竞争力</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">数据管理成为核心竞争力，直接影响财务表现。当“数据资产是企业核心资产”的概念深入人心之后，企业对于数据管理便有了更清晰的界定，将数据管理作为企业核心竞争力，持续发展，战略性规划与运用数据资产，成为企业数据管理的核心。数据资产管理效率与主营业务收入增长率、销售收入增长率显著正相关;此外，对于具有互联网思维的企业而言，数据资产竞争力所占比重为36.8%，数据资产的管理效果将直接影响企业的财务表现。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势七：数据质量是BI(商业智能)成功的关键</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">采用自助式商业智能工具进行大数据处理的企业将会脱颖而出。其中要面临的一个挑战是，很多数据源会带来大量低质量数据。想要成功，企业需要理解原始数据与数据分析之间的差距，从而消除低质量数据并通过BI获得更佳决策。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势八：数据生态系统复合化程度加强</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据的世界不只是一个单一的、巨大的计算机网络，而是一个由大量活动构件与多元参与者元素所构成的生态系统，终端设备提供商、基础设施提供商、网络服务提供商、网络接入服务提供商、数据服务使能者、数据服务提供商、触点服务、数据服务零售商等等一系列的参与者共同构建的生态系统。而今，这样一套数据生态系统的基本雏形已然形成，接下来的发展将趋向于系统内部角色的细分，也就是市场的细分;系统机制的调整，也就是商业模式的创新;系统结构的调整，也就是竞争环境的调整等等，从而使得数据生态系统复合化程度逐渐增强。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "1.4\t大数据发展趋势", "id": "4" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据并不在“大”，而在于“有用”。价值含量、挖掘成本比数量更为重要。对于很多行业而言，如何利用这些大规模数据是赢得竞争的关键。</span><sup><span style=\"font-size:12px\">[4]</span></sup></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据的价值体现在以下几个方面：</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">1)</span><span style=\"font-size:12px\">对大量消费者提供产品或服务的企业可以利用大数据进行精准营销</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">2) </span><span style=\"font-size:12px\">做小而美模式的中小微企业可以利用大数据做服务转型</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">3) </span><span style=\"font-size:12px\">面临互联网压力之下必须转型的传统企业需要与时俱进充分利用大数据的价值</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">在这个快速发展的智能硬件时代，困扰应用开发者的一个重要问题就是如何在功率、覆盖范围、传输速率和成本之间找到那个微妙的平衡点。企业组织利用相关数据和分析可以帮助它们降低成本、提高效率、开发新产品、做出更明智的业务决策等等。例如，通过结合大数据和高性能的分析，下面这些对企业有益的情况都可能会发生:</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">1</span><span style=\"font-size:12px\">）及时解析故障、问题和缺陷的根源，每年可能为企业节省数十亿美元。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">2</span><span style=\"font-size:12px\">）为成千上万的快递车辆规划实时交通路线，躲避拥堵。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">3</span><span style=\"font-size:12px\">）分析所有SKU，以利润最大化为目标来定价和清理库存。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">4</span><span style=\"font-size:12px\">）根据客户的购买习惯，为其推送他可能感兴趣的优惠信息。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">5</span><span style=\"font-size:12px\">）从大量客户中快速识别出金牌客户。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">6</span><span style=\"font-size:12px\">）使用点击流分析和数据挖掘来规避欺诈行为。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179572", "dis_title": "1.3\t大数据的价值", "id": "3" }, { "author_name": "wang五", "author_photo": "/images/student/FpkFhIB4cH.png", "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据技术的战略意义不在于掌握庞大的数据信息，而在于对这些含有意义的数据进行专业化处理。换而言之，如果把大数据比作一种产业，那么这种产业实现盈利的关键，在于提高对数据的“加工能力”，通过“加工”实现数据的“增值”。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">从技术上看，大数据与云计算的关系就像一枚硬币的正反面一样密不可分。大数据必然无法用单台的计算机进行处理，必须采用分布式架构。它的特色在于对海量数据进行分布式数据挖掘。但它必须依托云计算的分布式处理、分布式数据库和云存储、虚拟化技术。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">随着云时代的来临，大数据（Big data）也吸引了越来越多的关注。分析师团队认为，大数据（Big data）通常用来形容一个公司创造的大量非结构化数据和半结构化数据，这些数据在下载到关系型数据库用于分析时会花费过多时间和金钱。大数据分析常和云计算联系到一起，因为实时的大型数据集分析需要像MapReduce一样的框架来向数十、数百或甚至数千的电脑分配工作。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据需要特殊的技术，以有效地处理大量的容忍经过时间内的数据。适用于大数据的技术，包括大规模并行处理（MPP）数据库、数据挖掘、分布式文件系统、分布式数据库、云计算平台、互联网和可扩展的存储系统。大数据包括结构化、半结构化和非结构化数据，非结构化数据越来越成为数据的主要部分。据IDC的调查报告显示：企业中80%的数据都是非结构化数据，这些数据每年都按指数增长60%。大数据就是互联网发展到现今阶段的一种表象或特征而已，没有必要神话它或对它。保持敬畏之心，在以云计算为代表的技术创新大幕的衬托下，这些原本看起来很难收集和使用的数据开始容易被利用起来了，通过各行各业的不断创新，大数据会逐步为人类创造更多的价值。</span></p><p><span style=\"font-size:12px;font-family:等线\">其次，想要系统的认知大数据，必须要全面而细致的分解它，着手从三个层面来展开：第一层面是理论，理论是认知的必经途径，也是被广泛认同和传播的基线。在这里从大数据的特征定义理解行业对大数据的整体描绘和定性；从对大数据价值的探讨来深入解析大数据的珍贵所在；洞悉大数据的发展趋势；从大数据隐私这个特别而重要的视角审视人和数据之间的长久博弈。第二层面是技术，技术是大数据价值体现的手段和前进的基石。在这里分别从云计算、分布式处理技术、存储技术和感知技术的发展来说明大数据从采集、处理、存储到形成结果的整个过程。第三层面是实践，实践是大数据的最终价值体现。在这里分别从互联网的大数据，政府的大数据，企业的大数据和个人的大数据四个方面来描绘大数据已经展现的美好景象及即将实现的蓝图。&nbsp;</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179571", "dis_title": "1.2\t大数据技术", "id": "2" }];
+        //学生内容
+        var student = { "course": null, "id": "1", "seudent_photo": "/images/student/FpkFhIB4cH.png", "student_col": "理学院", "student_majo": "信息与计算科学", "student_name": "wang五", "student_per": "1", "student_phone": "123456789", "student_sex": "男" };
+        var app = new Vue({
+            el: "#app",
+            data: {
+                items: data,
+                student_name: student.student_name,
+                id: student.id,
+                seudent_photo: student.seudent_photo,
+                student_per: student.student_per,
+            },
+            filters: {
+                timeTransform: function (value) {
+                    var str = value + "000000000000000000000000000000000000000000000000000000000000000";
+                    a = new Date(Number(str.substr(0, 13)));
+                    return a.getFullYear() + '年' + a.getMonth() + "月" + a.getDate() + " " + a.getHours() + ":" + a.getMinutes();
+                }
+            },
+            methods: {
+                deleteItem: function (elem) {
+                    var url1 = elem.currentTarget.firstElementChild.innerHTML;
+                    console.log(url1)
+                }
+
+            }
+        })
+    </script>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <div id="app1" class="container">
+                        <div class="form-group">
+                            <small id="helpId" class="form-text text-muted">标题</small>
+                            <input type="text" class="form-control" v-model="title" name="" id=""
+                                aria-describedby="helpId" placeholder="">
+                        </div>
+                        <small id="helpId" class="form-text text-muted">正文</small>
+                        <div id="editor"></div>
+                        <button @click="publish" class="btn mt-2 bg-primary "> 发布</button>
+                        <button class="btn mt-2 bg-primary " onclick="editor.txt.clear();">清空</button>
+                    </div>
+                </div>
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = { title: '', html: '', content: '' };
+        var app = new Vue({
+            el: '#app1',
+            data: data,
+            methods: {
+                publish: function () {
+                    if (this.title == '') {
+                        alert("标题不能为空");
+                        return 0;
+                    }
+                    this.content = editor.txt.text();
+                    if (this.content == '') {
+                        alert("内容不能为空");
+                        return 0;
+                    }
+                    var formdata = new FormData();
+                    formdata.append("title", this.title);
+                    this.html = editor.txt.html();
+                    formdata.append("html", this.html);
+                    axios.post("/dis/publish", formdata)
+                        .then(res => {
+                            console.log(res.data);
+                            if (res.error != 0) {
+                                alert("发布成功！");
+                            } else {
+                                alter("发布成功！")
+                            }
+                            location.reload();
+                        })
+                        .catch(err => {
+                            alert("发布失败!");
+                        })
+                }
+            },
+        })
+    </script>
+    <script src="/wangEditor/wangEditor.js"></script>
+    <script type="text/javascript">
+        var E = window.wangEditor;
+        var editor = new E(document.getElementById('editor'))
+        //创建之前自定义视图
+        editor.customConfig.menus = [
+            'bold',  // 粗体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'emoticon',  // 表情
+            'undo',  // 撤销
+            'redo'  // 重复
+        ];
+        editor.customConfig.emotions = [
+            {
+                // tab 的标题
+                title: 'emoji',
+                // type -> 'emoji' / 'image'
+                type: 'emoji',
+                // content -> 数组
+                content: ['😀', '😃', '😄', '😁', '😆', '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😀', '😃', '😄', '😁', '😆', '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😀', '😃', '😄', '😁', '😆', '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😀', '😃', '😄', '😁', '😆', '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏', '😀', '😃', '😄', '😁', '😆', '😀', '😁', '😂', '🤣', '😃', '😄', '😅', '😆', '😉', '😊', '😋', '😎', '😍', '😘', '😗', '😙', '😚', '🙂', '🤗', '🤩', '🤔', '🤨', '😐', '😑', '😶', '🙄', '😏']
+            }
+        ];
+        editor.create();
+        editor.customConfig.pasteIgnoreImg = false;
+    </script>
+
+
+
+    <!-- jquery动画，删除了booststrap的jquery插件 -->
+    <script src="/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="/js/jquery.morecontent.js"></script>
+    <script>
+        $(document).ready(function () {
+            var example = $('[data-mrc]');
+            example.moreContent({
+                easing: 'easeOutBounce',
+            });
+        });
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/bootstrap-4.3.1/popper.min.js "></script>
+    <script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
+
+
+    </div>
+</body>
+
+</html>

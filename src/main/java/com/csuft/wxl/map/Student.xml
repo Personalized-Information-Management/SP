@@ -4,9 +4,98 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.csuft.wxl.map.StudentMap">
+
 	<insert id="insertOne" parameterType="Student">
 		insert ignore into
 		student(id) value(1234);
-		insert ignore into user(id,user_per) values(1234,1);
+		insert ignore into user(id,user_per)
+		values(1234,1);
 	</insert>
+	<!-- 根据学生id获取 parameterType="Student" -->
+	<resultMap type="Student" id="StudentCourse">
+		<id column="id" property="id"></id>
+		<collection property="course" ofType="Course">
+			<id column="course_id" property="id" />
+			<result column="course_name" property="course_name" />
+			<result column="course_photo" property="course_photo" />
+			<result column="course_teacher" property="course_teacher" />
+			<result column="course_hour" property="course_hour" />
+			<result column="course_teacher_name"
+				property="course_teacher_name" />
+		</collection>
+	</resultMap>
+	<!-- 正在学习的课程的id,名字图片路径教师id 课时教师姓名 -->
+	<select id="selecStudyCourse" resultMap="StudentCourse"
+		parameterType="Student">
+		select student.id
+		id,course_id,course_name,course_photo,course_teacher,course_hour,teacher_name
+		course_teacher_name from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.study=1 and
+		student.id=#{id}
+	</select>
+	<!-- 收藏的课程 -->
+	<select id="selectCollectCourseById" resultMap="StudentCourse"
+		parameterType="Student">
+		select student.id
+		id,course_id,course_name,course_photo,course_teacher,course_hour,teacher_name
+		course_teacher_name from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.collect=1 and
+		student.id=#{id}
+	</select>
+	<!-- finish the course 查找完成的课程 -->
+	<select id="selectFinishCourseById" resultMap="StudentCourse"
+		parameterType="Student">
+		select student.id
+		id,course_id,course_name,course_photo,course_teacher,course_hour,teacher_name
+		course_teacher_name from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.study=2 and
+		student.id=#{id}
+	</select>
+
+	<!-- 更具id获取学生的信息 -->
+	<select id="selectStudentById" parameterType="Student"
+		resultType="Student">
+		SELECT * FROM sp.student where id=#{id}
+	</select>
+
+	<update id="updateStudentById" parameterType="Student">
+		update student set student_name=#{student_name}, student_sex=#{student_sex},
+		student_col=#{student_col}, student_majo=#{student_majo},
+		student_phone=#{student_phone} where id=#{id}
+	</update>
+	<!-- 只是更新图片路径 -->
+	<update id="updateStudentPhotoById" parameterType="Student">
+		update student set seudent_photo=#{seudent_photo} where id=#{id}
+	</update>
+
+
+	<!-- 浏览过的课程 查找完成的课程 -->
+	<select id="selectBrowseCourseById" resultMap="StudentCourse">
+		select student.id
+		id,course_id,course_name,course_photo,course_teacher,course_hour,teacher_name
+		course_teacher_name from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.study=0 and
+		student.id=1
+	</select>
+
 </mapper>

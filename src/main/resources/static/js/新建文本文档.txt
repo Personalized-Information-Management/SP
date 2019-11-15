@@ -1,0 +1,5 @@
+页面切换动画
+demo.js 
+jquery.morecontent.js
+jquery.morecontent.lite.js
+jquery-1.11.0.min.js

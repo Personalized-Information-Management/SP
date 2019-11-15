@@ -24,4 +24,30 @@ public class CourseServiceImpl implements CourseService {
 		return courseMap.selectAll();
 	}
 
+	@Override
+	public List<Course> getAllListPart() {
+		// TODO Auto-generated method stub
+		return courseMap.selectAllIdTeacherName();
+	}
+
+	@Override
+	public Course getDetails(Course course) {
+		// TODO Auto-generated method stub
+		return courseMap.selectCollect(course);
+	}
+
+	
+
+	@Override
+	public String getCollect(Course course) {
+		// TODO Auto-generated method stub
+		return courseMap.selectCourseCollect(course);
+	}
+
+	@Override
+	public String getStudy(Course course) {
+		// TODO Auto-generated method stub
+		return courseMap.selectCourseStudy(course);
+	}
+
 }

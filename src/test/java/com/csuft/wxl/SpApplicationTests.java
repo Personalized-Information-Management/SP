@@ -1,6 +1,8 @@
 package com.csuft.wxl;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,10 +14,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.csuft.wxl.map.CourseMap;
+import com.csuft.wxl.map.DiscussMap;
+import com.csuft.wxl.map.NoticeMap;
+import com.csuft.wxl.map.StudentMap;
 import com.csuft.wxl.map.UserMap;
 import com.csuft.wxl.pojo.Course;
+import com.csuft.wxl.pojo.Discuss;
+import com.csuft.wxl.pojo.Student;
+import com.csuft.wxl.pojo.UploadImageFile;
 import com.csuft.wxl.pojo.User;
 import com.csuft.wxl.service.CourseService;
+import com.csuft.wxl.service.DiscussService;
+import com.csuft.wxl.service.NoticeService;
+import com.csuft.wxl.service.StudentService;
 import com.csuft.wxl.service.UserService;
 
 import cn.hutool.core.io.FileUtil;
@@ -31,20 +42,221 @@ public class SpApplicationTests {
 	// 测试mybatis
 	@Autowired
 	UserMap userMap;
+
 	@Autowired
 	CourseMap courseMap;
+
 	@Autowired
 	UserService userService;
+
 	@Autowired
 	CourseService courseService;
-	@Test
-	public void name2() {
-		List<Course> list=courseService.getAllList();
-		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+
+	@Autowired
+	StudentService studentService;
+
+	@Autowired
+	StudentMap studentMap;
+	@Autowired
+	DiscussService discussService;
+	
+	@Autowired
+	DiscussMap discussMap;
+	@Autowired
+	NoticeMap noticeMap;
+	@Autowired
+	NoticeService noticeService;
+	public void name17() {
+		Student student = new Student();
+		student.setId("1");
+		student = noticeService.getNotice(student);
+		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+	}
+//	@Test
+	public void name16() {
+		Student student=new Student();
+		student=noticeMap.selectNotice();
+		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+	}
+	
+//	@Test
+	public void name15() {
+		Discuss discuss = new Discuss();
+		discuss.setDis_auto("1");
+		discuss.setDis_per("1");
+		discuss.setDis_title("我的世界");
+		discuss.setDis_content("<p>我的世界</p>");
+		Date date = new Date();
+		discuss.setDis_time(String.valueOf(date.getTime()));
+		System.out.println(discuss.toString());
+		int a=discussService.setDis(discuss);
+		System.out.println("\n\n\n");
+		if (a==1) {
+			System.out.println("修改成功");
+		}else {
+			System.out.println("修改失败");
+		}
+		System.out.println("\n\n\n");
+	}
+
+//	@Test
+	public void name14() {
+		
+		List<Discuss> list=discussMap.selectAllDisAndAuthor();
+		String json = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue);
+		Student student=new Student();
+		student.setId("1");
+		student.setStudent_per("1");
+		student=studentService.getStudent(student);
+		System.out.println();
+		System.out.println(student);
+		System.out.println();
+		System.out.println(json);
+		System.out.println();
+	}
+
+//	@Test
+	public void name13() {
+		Student student = new Student();
+		student.setId("1");
+		student = studentService.getStudent(student);
+		if (student.getSeudent_photo() != null) {
+			String str = student.getSeudent_photo();
+			String[] str2 = str.split(UploadImageFile.VIRT_STUDENT_PATH);
+			if (!str2[str2.length - 1].equals("")) {
+				String str3 = UploadImageFile.REAL_STUDENT_PATH + str2[str2.length - 1];
+				System.out.println("str3" + str3);
+				File file = new File(str3);
+				if (file.exists()) {
+					System.out.println("文件存在");
+				} else {
+					System.out.println("文件不存在");
+				}
+
+			} else {
+				System.out.println("文件不存在");
+			}
+		} else {
+			System.out.println("文件不存在");
+		}
+
+	}
+
+//	@Test
+	public void name12() {
+		Student student = new Student();
+		student.setId("1");
+		student.setStudent_name("王五");
+		student.setStudent_sex("男");
+		student.setStudent_phone("123456789");
+		student.setStudent_col("商学院");
+		student.setStudent_majo("生命科学");
+		int a = studentService.modifyStudnt(student);
+		if (a == 1) {
+			System.out.println("修改成功");
+		} else {
+			System.out.println("修改失败");
+		}
+
+	}
+
+//	@Test
+	public void name11() {
+		Student student = new Student();
+		student.setId("1");
+		student = studentService.getStudent(student);
+		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name10() {
+		Student student = new Student();
+		student.setId("1");
+		student = studentMap.selectStudentById(student);
+		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name9() {
+		Course course = new Course();
+		course.setId("93");
+		course = courseService.getDetails(course);
+		String str1 = courseService.getCollect(course);
+		String str2 = courseService.getStudy(course);
+		course.setCollect(str1);
+		course.setStudy(str2);
+		String json = JSON.toJSONString(course, SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name8() {
+		Course course = new Course();
+		course.setId("1");
+		course = courseService.getDetails(course);
+		String str1 = courseMap.selectCourseCollect(course);
+		String str2 = courseMap.selectCourseStudy(course);
+		course.setCollect(str1);
+		course.setStudy(str2);
+		String json = JSON.toJSONString(course, SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name7() {
+		Course course = new Course();
+		course.setId("1");
+		course = courseMap.selectCollect(course);
+		String json = JSON.toJSONString(course, SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name6() {
+		Student student = new Student();
+		student.setId("1");
+		student = studentMap.selectCollectCourseById(student);
+		System.out.println(student.getCourse().size());
+		List<Course> list = student.getCourse();
 		for (Course course : list) {
 			System.out.println(course.toString());
-			
 		}
+	}
+
+//	@Test
+	public void name5() {
+		Student student = new Student();
+		student.setId("1");
+		student = studentService.getStudentStudysCourse(student);
+		String json = JSON.toJSONString(student.getCourse(), SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name4() {
+		Student student = new Student();
+		student.setId("1");
+		Student student1 = studentMap.selecStudyCourse(student);
+		System.out.println(student1.toString());
+
+	}
+
+//	@Test
+	public void name3() {
+		List<Course> list = courseService.getAllListPart();
+		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
+	}
+
+//	@Test
+	public void name2() {
+		List<Course> list = courseService.getAllList();
+		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+		System.out.println(json);
 	}
 
 //	@Test
@@ -91,8 +303,6 @@ public class SpApplicationTests {
 			course.setId(csvRow.get(1));
 			course.setCourse_name(csvRow.get(2));
 			course.setCourse_introduce(csvRow.get(3));
-			course.setCourse_collect(csvRow.get(4));
-			course.setCourse_apply(csvRow.get(5));
 			course.setCourse_teacher(csvRow.get(6));
 			course.setCourse_photo(csvRow.get(7));
 			list.add(course);

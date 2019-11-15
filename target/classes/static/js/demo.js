@@ -1,0 +1,134 @@
+$(document).ready(function() {
+
+	/* Изменение настроек по умолчанию (свойство) 默认设置更改(属性)*/
+	// $.fn.moreContent.defaults.color = '#fa0';
+
+	/* Изменение настроек по умолчанию (объект) 默认设置更改(对象)*/
+	// $.fn.moreContent.defaults = $.extend(true, {}, $.fn.moreContent.defaults, {
+	// 	color: '#bbb'
+	// });
+
+	/* Расширить плагин методом 用方法扩展插件 */
+	// $.fn.moreContent.prototype.newMethod = function() {
+	// 	console.log( 'newMethod', this );
+	// };
+
+	var example = $('[data-mrc]');
+
+	example.on('beforeInitSwitch.mrc', function(e, inst, sets) {
+
+		// console.log( 'change', inst.mode, inst.status );
+
+		// Кнопка DROP // DROP按钮
+		// inst.layout.drop = $('<button type="button">Показать больше</button>')
+		// .on('click', function() {
+		// 	inst.layout.self.moreContent('drop', 15, '%');
+		// }).appendTo(inst.layout.controls).hide();
+
+		// Прогресс
+		// inst.layout.progress = $('<div></div>')
+		// 	.insertBefore(inst.layout.content);
+	});
+
+	example.on('change.mrc', function(e, inst, sets) {
+
+		// console.log( 'change', inst.mode, inst.status );
+
+		// Кнопка DROP
+		// if( inst.layout.drop ) {
+
+		// 	if( !inst.mode || inst.status ) {
+		// 		inst.layout.drop.fadeOut(sets.speed);
+		// 	} else {
+		// 		inst.layout.drop.fadeIn(sets.speed);
+		// 	}
+
+		// }
+
+		// Прогресс
+		// if( inst.layout.progress ) {
+		// 	inst.layout.progress.text(Math.ceil(inst.curHeight/(inst.fullHeight/100)) + '%');
+		// }
+		
+		// inst.manually = true;
+
+		// content.animate({
+		// 	height: height
+		// }, 1500, function() {
+		// 	inst.afterChange('open');
+		// });
+
+	});
+
+	example.on('beforeOpen.mrc', function(e, inst, sets, content, height) {
+
+		// console.log( 'beforeOpen', height );
+
+		// inst.manually = true;
+
+		// content.animate({
+		// 	height: height
+		// }, 1000, 'easeOutBounce', function() {
+		// 	inst.afterChange('open');
+		// });
+		
+	});
+
+	example.on('beforeClose.mrc', function(e, inst, sets, content, height) {
+
+		// console.log( 'beforeClose', height );
+
+		// inst.manually = true;
+
+		// content.animate({
+		// 	// opacity: 1,
+		// 	height: height
+		// }, 1000, 'easeOutBounce', function() {
+		// 	inst.afterChange('close');
+		// });
+		
+	});
+
+	example.on('beforeDrop.mrc', function(e, inst, sets, content, height) {
+
+		// console.log( inst.layout.btn.addClass('animated shake') );
+
+		// console.log( 'beforeDrop', height );
+
+		// inst.manually = true;
+
+		// content.animate({
+		// 	// opacity: 1,
+		// 	height: height
+		// }, 1000, 'easeOutBounce', function() {
+		// 	inst.afterChange('drop');
+		// });
+		
+	});
+
+	example.on('afterDrop.mrc', function(e, inst, sets, content) {});
+	example.on('afterOpen.mrc', function(e, inst, sets, content) {});
+	example.on('afterOpen.mrc', function(e, inst, sets, content) {});
+
+	// Инициализация
+	example.moreContent({
+		// useCss: false,
+		// open: true,
+		// // event: 'mouseover',
+		easing: 'easeOutBounce',
+	});
+
+	// Методы:
+	$('.method-controls button').on('click', function() {
+		var methName = $(this).data('meth');
+		console.log( 'Ручной вызов метода: ' + $(this).text() );
+		example.moreContent(methName);
+	});
+
+	/*
+	
+	- Не всегда срабатывает adaptive+animate
+	
+	*/
+
+});

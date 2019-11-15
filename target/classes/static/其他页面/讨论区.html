@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    .box {
+      border: 1px solid red;
+    }
+
+    .flo {
+      display: block;
+      float: right;
+    }
+
+    .wang-col-1 {
+      display: inline;
+    }
+
+    .wang-col-2 {
+      display: none;
+    }
+
+
+    @media(max-width: 576px) {
+      .wang-col-1 {
+        display: none;
+      }
+
+      .wang-col-2 {
+        display: inline;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <!-- 个人信息 -->
+      <table class="col-sm-2 wang-col-1 offset-1">
+        <tr>
+          <td class="flo">
+            <img src="讨论区_files/image/用户.png" class="mr-0 " style="width: 60px; height: 60px;">
+          </td>
+        </tr>
+        <tr>
+          <td class="flo">
+            <div class="">姓名：张三</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="flo">
+            <p class="">账号：2019</p>
+          </td>
+        </tr>
+      </table>
+      <!-- 搜索栏 -->
+      <div class="col-sm-9 wang-col-1">
+        <br>
+        <br>
+        <div class="row  justify-content-center">
+          <input type="text" class="input-medium col-sm-8 search-query">
+          <button class="btn btn-primary mx-2">搜索</button>
+          <img src="img/addnote.png" width="40px"
+            class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 ">
+        <table class="col-0 col-sm-12 wang-col-1">
+          <tr>
+            <td class="row justify-content-end ">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><img src="img/课程.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">收件箱&nbsp;&nbsp;&nbsp;</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row justify-content-end ">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><img src="img/作业1.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">课程讨论</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row justify-content-end ">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active"><img src="img/教师.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">回复我的</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row justify-content-end ">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item active  "><img src="img/课程.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">我发表的</a></li>
+              </ol>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 当屏幕宽度小于576px时显示 -->
+      <div class="wang-col-2">
+        <table class="offset-3">
+          <tr>
+            <td class="">
+              <img src="讨论区_files/image/用户.png" class="mr-0 " style="width: 60px; height: 60px;">
+            </td>
+          </tr>
+          <tr>
+            <td class="flo">
+              <div class="">姓名：张三</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="flo">
+              <p class="">账号：2019</p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- 链接 -->
+        <table class="offset-1 col-12">
+          <tr>
+            <td class="row col-12 justify-content-end ">
+              <ol class="breadcrumb col-12">
+                <li class="breadcrumb-item active"><img src="img/课程.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">收件箱&nbsp;&nbsp;&nbsp;</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row col-12 justify-content-end ">
+              <ol class="breadcrumb col-12">
+                <li class="breadcrumb-item active"><img src="img/作业1.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">课程讨论</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row col-12 justify-content-end ">
+              <ol class="breadcrumb col-12">
+                <li class="breadcrumb-item active"><img src="img/教师.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">回复我的</a></li>
+              </ol>
+            </td>
+          </tr>
+          <tr>
+            <td class="row col-12 justify-content-end ">
+              <ol class="breadcrumb col-12">
+                <li class="breadcrumb-item active  "><img src="img/课程.png"
+                    class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""
+                    style="width: 30px; height: 30px;"></li>
+                <li class="breadcrumb-item"><a href="#">我发表的</a></li>
+              </ol>
+            </td>
+          </tr>
+        </table>
+        <!-- 搜索栏 -->
+        <div class="row offset-1 mt-1">
+          <input type="text" class="input-medium search-query">
+          <button class="btn btn-primary mx-2">搜索</button>
+          <img src="讨论区_files/image/addnote.png" width="40px"
+            class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+        </div>
+      </div>
+
+      <!-- 段子区 -->
+      <div class=" col-sm-9">
+        <!-- 一条用户信息 -->
+        <div class="media p-3 yonghu">
+          <img src="讨论区_files/image/用户.png" alt="John Doe" class="mr-3 "
+            style="width: 60px; height: 60px;border-radius: 1px soild red;">
+          <div class="card" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">标题</h4>
+              <p class="card-text">内容</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+            <div class="card-footer ">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-xs-10">
+
+                  </div>
+                  <div class="col-sm-xs-1">
+                    <img src="讨论区_files/image/点赞1.png" alt="dianzan" class="mr-3 " style="width: 30px; height: 30px;">
+                  </div>
+                  <div class="col-sm-xs-1">
+
+                    <img src="讨论区_files/image/讨论区.png" alt="comment" class="mr-3 " style="width: 30px; height: 30px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 第二条用户信息 -->
+        <div class="media p-3 yonghu">
+          <img src="讨论区_files/image/用户.png" alt="John Doe" class="mr-3 "
+            style="width: 60px; height: 60px;border-radius: 1px soild red;">
+          <div class="card" style="width:100%">
+            <div class="card-body">
+              <h4 class="card-title">标题</h4>
+              <p class="card-text">内容</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+            <div class="card-footer ">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-xs-10">
+
+                  </div>
+                  <div class="col-sm-xs-1">
+                    <img src="讨论区_files/image/点赞1.png" alt="dianzan" class="mr-3 " style="width: 30px; height: 30px;">
+                  </div>
+                  <div class="col-sm-xs-1">
+
+                    <img src="讨论区_files/image/讨论区.png" alt="comment" class="mr-3 " style="width: 30px; height: 30px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>个人信息</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <!--注意引入css文件用link-->
+  <script scr="/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+  <link href="/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!--vue.js-->
+  <script src="/js/vue.js"></script>
+  <!--axios.js-->
+  <script src="/js/axios.min.js"></script>
+
+  <style type="text/css">
+    .toolbar {
+      border: 1px solid rgb(0, 0, 0);
+    }
+
+    .text {
+      border: 1px solid rgb(2, 2, 2);
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+
+  </div>
+  <div class="form-group">
+    <small id="helpId" class="form-text text-muted">标题</small>
+    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+  </div>
+  <small id="helpId" class="form-text text-muted">正文</small>
+  <div id="editor" class="text">
+    <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+  </div>
+
+  <button id="btn1">获取html</button>
+  <button id="btn2">获取text</button>
+  <button id="btn3">获取json</button>
+  <xmp class="toolbar" id="dis"></xmp>
+  <xmp class="toolbar" id="dis1"></xmp>
+
+
+  <script src="wangEditor/wangEditor.js"></script>
+  <script type="text/javascript">
+    var E = window.wangEditor;
+
+    var editor = new E(document.getElementById('editor'))
+    //创建之前自定义视图
+    editor.customConfig.menus = [
+      'head',  // 标题
+      'bold',  // 粗体
+      'fontSize',  // 字号
+      'fontName',  // 字体
+      'italic',  // 斜体
+      'underline',  // 下划线
+      'strikeThrough',  // 删除线
+      'foreColor',  // 文字颜色
+      'backColor',  // 背景颜色
+      'link',  // 插入链接
+      'list',  // 列表
+      'justify',  // 对齐方式
+      'quote',  // 引用
+      'emoticon',  // 表情
+      'image',  // 插入图片
+      'table',  // 表格
+      // 'video',  // 插入视频
+      'code',  // 插入代码
+      'undo',  // 撤销
+      'redo'  // 重复
+    ];
+
+    editor.customConfig.uploadImgServer = '/upload-image'
+    //配置图片为3M
+    editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
+    //限制图片章数
+    editor.customConfig.uploadImgMaxLength = 1
+    //自定文件名
+    editor.customConfig.uploadFileName = 'myFileName'
+
+    //上传图片的监听
+    editor.customConfig.uploadImgHooks = {
+      // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+      // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+      customInsert: function (insertImg, result, editor) {
+        // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+        // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+        // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+        var url = result.url
+        insertImg(url)
+        // result 必须是一个 JSON 格式字符串！！！否则报错
+      }
+    };
+    editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0
+    editor.create();
+
+
+    // 禁用启用
+    editor.$textElem.attr('contenteditable', false);
+    editor.$textElem.attr('contenteditable', true);
+    //设置内容
+    editor.txt.html('<p>用 JS 设置的内容</p>');
+    //追加内容
+    editor.txt.append('<p>追加的内容</p>');
+    //清空内容
+    editor.txt.clear();
+    document.getElementById('btn1').addEventListener('click', function () {
+      // 读取 html
+      document.getElementById('dis').innerHTML = editor.txt.html();
+    }, false)
+
+    document.getElementById('btn2').addEventListener('click', function () {
+      // 读取 text
+      document.getElementById('dis').innerHTML = editor.txt.text();
+    }, false)
+    document.getElementById('btn3').addEventListener('click', function () {
+      var json = editor.txt.getJSON()  // 获取 JSON 格式的内容
+      var jsonStr = JSON.stringify(json)
+      document.getElementById('dis').innerHTML = json;
+      document.getElementById('dis1').innerHTML = jsonStr;
+    });
+    //不能粘贴图片
+    editor.customConfig.pasteIgnoreImg = false;
+  </script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
+  <script src="/bootstrap-4.3.1/popper.min.js "></script>
+  <script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
+</body>
+
+</html>

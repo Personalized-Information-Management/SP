@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>完整demo</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="vue/vue.js"></script>
+
+    <style>
+        .neirong {
+            /* height: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis; */
+            height: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display:box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        /* .neirong::after {
+            content: "查看全部";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding-left: 40px;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- 编辑框 -->
+    <div class="container" style="width: 500px;height: 500px;">
+        <script id="editor" type="text/plain"></script>
+        <script id="container" name="content" type="text/plain">编辑</script>
+        <script type="text/javascript" src="Ueditor/ueditor.config.js"></script>
+        <script type="text/javascript" src="Ueditor/ueditor.all.js"></script>
+        <div id="app">
+            <button class="btn bg-primary mt-1" @click="getHtml">发布</button>
+            值：{{content}}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        console.log("文本编辑");
+        var ue = UE.getEditor('editor', {
+            autoHeight: false,
+            toolbars: [
+                [
+                    'fullscreen', 'source', '|', 'undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikethrough', '|', 'subscript', 'superscript', '|'], ['forecolor', 'backcolor', 'removeformat', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc'], ['paragraph', 'fontfamily', 'fontsize', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify'], ['horizontal', 'time', 'date'
+                ]
+            ],
+            emotionLocalization: true,
+            enableAutoSave: false
+        });
+        var data = { Html: '', content: '' };
+        var app = new Vue({
+            el: "#app",
+            data: data,
+            methods: {
+                getHtml: function () {
+                    this.content = UE.getEditor('editor').getContent();
+                }
+            },
+        });
+    </script>
+    <div id="discuss">
+        <div v-for="item in items">
+            <div class="col-sm-9">
+                <div class="media p-3 yonghu">
+                    <div class="card" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">{{item.dis_title}}</h4>
+                            <p class="card-text neirong" v-html="item.dis_content"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var data = { items: [{ "dis_auto": "1", "dis_content": "<p style=\"margin-left:28px;text-indent:43px\"><span style=\"font-size:16px\">大数据（big data）是指无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产，“大数据”是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力来适应海量、高增长率和多样化的信息资产，大数据是一种规模大到在获取、存储、管理、分析方面大大超出了传统数据库软件工具能力范围的数据集合，具有海量的数据规模、快速的</span><span style=\"font-size:16px;font-family:宋体;color:black;letter-spacing:3px\">数据流转、多样的数据类型和价值密度低四大特征。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "大数据是什么", "id": "1" }, { "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据技术的战略意义不在于掌握庞大的数据信息，而在于对这些含有意义的数据进行专业化处理。换而言之，如果把大数据比作一种产业，那么这种产业实现盈利的关键，在于提高对数据的“加工能力”，通过“加工”实现数据的“增值”。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">从技术上看，大数据与云计算的关系就像一枚硬币的正反面一样密不可分。大数据必然无法用单台的计算机进行处理，必须采用分布式架构。它的特色在于对海量数据进行分布式数据挖掘。但它必须依托云计算的分布式处理、分布式数据库和云存储、虚拟化技术。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">随着云时代的来临，大数据（Big data）也吸引了越来越多的关注。分析师团队认为，大数据（Big data）通常用来形容一个公司创造的大量非结构化数据和半结构化数据，这些数据在下载到关系型数据库用于分析时会花费过多时间和金钱。大数据分析常和云计算联系到一起，因为实时的大型数据集分析需要像MapReduce一样的框架来向数十、数百或甚至数千的电脑分配工作。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据需要特殊的技术，以有效地处理大量的容忍经过时间内的数据。适用于大数据的技术，包括大规模并行处理（MPP）数据库、数据挖掘、分布式文件系统、分布式数据库、云计算平台、互联网和可扩展的存储系统。大数据包括结构化、半结构化和非结构化数据，非结构化数据越来越成为数据的主要部分。据IDC的调查报告显示：企业中80%的数据都是非结构化数据，这些数据每年都按指数增长60%。大数据就是互联网发展到现今阶段的一种表象或特征而已，没有必要神话它或对它。保持敬畏之心，在以云计算为代表的技术创新大幕的衬托下，这些原本看起来很难收集和使用的数据开始容易被利用起来了，通过各行各业的不断创新，大数据会逐步为人类创造更多的价值。</span></p><p><span style=\"font-size:12px;font-family:等线\">其次，想要系统的认知大数据，必须要全面而细致的分解它，着手从三个层面来展开：第一层面是理论，理论是认知的必经途径，也是被广泛认同和传播的基线。在这里从大数据的特征定义理解行业对大数据的整体描绘和定性；从对大数据价值的探讨来深入解析大数据的珍贵所在；洞悉大数据的发展趋势；从大数据隐私这个特别而重要的视角审视人和数据之间的长久博弈。第二层面是技术，技术是大数据价值体现的手段和前进的基石。在这里分别从云计算、分布式处理技术、存储技术和感知技术的发展来说明大数据从采集、处理、存储到形成结果的整个过程。第三层面是实践，实践是大数据的最终价值体现。在这里分别从互联网的大数据，政府的大数据，企业的大数据和个人的大数据四个方面来描绘大数据已经展现的美好景象及即将实现的蓝图。&nbsp;</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "1.2\t大数据技术", "id": "2" }, { "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据并不在“大”，而在于“有用”。价值含量、挖掘成本比数量更为重要。对于很多行业而言，如何利用这些大规模数据是赢得竞争的关键。</span><sup><span style=\"font-size:12px\">[4]</span></sup></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据的价值体现在以下几个方面：</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">1)</span><span style=\"font-size:12px\">对大量消费者提供产品或服务的企业可以利用大数据进行精准营销</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">2) </span><span style=\"font-size:12px\">做小而美模式的中小微企业可以利用大数据做服务转型</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">3) </span><span style=\"font-size:12px\">面临互联网压力之下必须转型的传统企业需要与时俱进充分利用大数据的价值</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">在这个快速发展的智能硬件时代，困扰应用开发者的一个重要问题就是如何在功率、覆盖范围、传输速率和成本之间找到那个微妙的平衡点。企业组织利用相关数据和分析可以帮助它们降低成本、提高效率、开发新产品、做出更明智的业务决策等等。例如，通过结合大数据和高性能的分析，下面这些对企业有益的情况都可能会发生:</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">1</span><span style=\"font-size:12px\">）及时解析故障、问题和缺陷的根源，每年可能为企业节省数十亿美元。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">2</span><span style=\"font-size:12px\">）为成千上万的快递车辆规划实时交通路线，躲避拥堵。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">3</span><span style=\"font-size:12px\">）分析所有SKU，以利润最大化为目标来定价和清理库存。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">4</span><span style=\"font-size:12px\">）根据客户的购买习惯，为其推送他可能感兴趣的优惠信息。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">5</span><span style=\"font-size:12px\">）从大量客户中快速识别出金牌客户。</span></p><p style=\"text-indent:35px\"><span style=\"font-size: 12px\">6</span><span style=\"font-size:12px\">）使用点击流分析和数据挖掘来规避欺诈行为。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "1.3\t大数据的价值", "id": "3" }, { "dis_auto": "1", "dis_content": "<p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势一：数据的资源化</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">何为资源化，是指大数据成为企业和社会关注的重要战略资源，并已成为大家争相抢夺的新焦点。因而，企业必须要提前制定大数据营销战略计划，抢占市场先机。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势二：与云计算的深度结合</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据离不开云处理，云处理为大数据提供了弹性可拓展的基础设备，是产生大数据的平台之一。自2013年开始，大数据技术已开始和云计算技术紧密结合，预计未来两者关系将更为密切。除此之外，物联网、移动互联网等新兴计算形态，也将一齐助力大数据革命，让大数据营销发挥出更大的影响力。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势三：科学理论的突破</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">随着大数据的快速发展，就像计算机和互联网一样，大数据很有可能是新一轮的技术革命。随之兴起的数据挖掘、机器学习和人工智能等相关技术，可能会改变数据世界里的很多算法和基础理论，实现科学技术上的突破。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势四：数据科学和数据联盟的成立</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">未来，数据科学将成为一门专门的学科，被越来越多的人所认知。各大高校将设立专门的数据科学类专业，也会催生一批与之相关的新的就业岗位。与此同时，基于数据这个基础平台，也将建立起跨领域的数据共享平台，之后，数据共享将扩展到企业层面，并且成为未来产业的核心一环。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势五：数据泄露泛滥</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">未来几年数据泄露事件的增长率也许会达到100%，除非数据在其源头就能够得到安全保障。可以说，在未来，每个财富500强企业都会面临数据攻击，无论他们是否已经做好安全防范。而所有企业，无论规模大小，都需要重新审视今天的安全定义。在财富500强企业中，超过50%将会设置首席信息安全官这一职位。企业需要从新的角度来确保自身以及客户数据，所有数据在创建之初便需要获得安全保障，而并非在数据保存的最后一个环节，仅仅加强后者的安全措施已被证明于事无补。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势六：数据管理成为核心竞争力</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">数据管理成为核心竞争力，直接影响财务表现。当“数据资产是企业核心资产”的概念深入人心之后，企业对于数据管理便有了更清晰的界定，将数据管理作为企业核心竞争力，持续发展，战略性规划与运用数据资产，成为企业数据管理的核心。数据资产管理效率与主营业务收入增长率、销售收入增长率显著正相关;此外，对于具有互联网思维的企业而言，数据资产竞争力所占比重为36.8%，数据资产的管理效果将直接影响企业的财务表现。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势七：数据质量是BI(商业智能)成功的关键</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">采用自助式商业智能工具进行大数据处理的企业将会脱颖而出。其中要面临的一个挑战是，很多数据源会带来大量低质量数据。想要成功，企业需要理解原始数据与数据分析之间的差距，从而消除低质量数据并通过BI获得更佳决策。</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">趋势八：数据生态系统复合化程度加强</span></p><p style=\"text-indent:35px\"><span style=\"font-size:12px\">大数据的世界不只是一个单一的、巨大的计算机网络，而是一个由大量活动构件与多元参与者元素所构成的生态系统，终端设备提供商、基础设施提供商、网络服务提供商、网络接入服务提供商、数据服务使能者、数据服务提供商、触点服务、数据服务零售商等等一系列的参与者共同构建的生态系统。而今，这样一套数据生态系统的基本雏形已然形成，接下来的发展将趋向于系统内部角色的细分，也就是市场的细分;系统机制的调整，也就是商业模式的创新;系统结构的调整，也就是竞争环境的调整等等，从而使得数据生态系统复合化程度逐渐增强。</span></p><p><br/></p>", "dis_per": "1", "dis_time": "1573179573", "dis_title": "1.4\t大数据发展趋势", "id": "4" }] }
+        var app = new Vue({
+            el: '#discuss',
+            data: data
+        });
+    </script>
+
+
+</body>
+
+</html>

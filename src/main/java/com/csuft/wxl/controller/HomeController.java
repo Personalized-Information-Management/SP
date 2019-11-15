@@ -1,14 +1,25 @@
 package com.csuft.wxl.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 //logins
 //logout
 //zhuye
 //course
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.csuft.wxl.pojo.Course;
+import com.csuft.wxl.pojo.Student;
+import com.csuft.wxl.service.CourseService;
+import com.csuft.wxl.service.StudentService;
 
 @Controller
 public class HomeController {
@@ -25,17 +36,26 @@ public class HomeController {
 		request.getSession().setAttribute("per", null);
 		return "jsp/logout";
 	}
-
+	@Autowired
+	StudentService studentService;
 	@RequestMapping("/zhuye")
-	public String name3(HttpServletRequest request, HttpServletResponse response) {
+	public String name3(HttpServletRequest request, HttpServletResponse response,Model m) {
 		if (request.getSession().getAttribute("name") == null) {
 			return "forward:index";
 		}
+		Student student=new Student();
+		student.setId((String)request.getSession().getAttribute("id"));
+		student = studentService.getStudent(student);
+		m.addAttribute("photo", "\""+student.getSeudent_photo()+"\"");
 		return "jsp/zhuye";
 	}
-
+	@Autowired
+	CourseService courseService;
 	@RequestMapping("/course")
-	public String name4() {
+	public String name4(HttpServletRequest request, HttpServletResponse response,Model m) {
+		List<Course> list=courseService.getAllListPart();
+		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+		m.addAttribute("json", json);
 		return "jsp/course";
 	}
 

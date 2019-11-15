@@ -1,5 +1,7 @@
 package com.csuft.wxl.pojo;
 
+import java.util.List;
+
 public class Student {
 	String id;
 	String student_name;
@@ -9,6 +11,22 @@ public class Student {
 	String student_phone;
 	String seudent_photo;
 	String student_per;
+	List<Course> course;
+	List<Notice> notices;
+	
+	
+	public List<Notice> getNotices() {
+		return notices;
+	}
+	public void setNotices(List<Notice> notices) {
+		this.notices = notices;
+	}
+	public List<Course> getCourse() {
+		return course;
+	}
+	public void setCourse(List<Course> course) {
+		this.course = course;
+	}
 	public String getId() {
 		return id;
 	}
@@ -61,7 +79,7 @@ public class Student {
 	public String toString() {
 		return "Student [id=" + id + ", student_name=" + student_name + ", student_sex=" + student_sex
 				+ ", student_col=" + student_col + ", student_majo=" + student_majo + ", student_phone=" + student_phone
-				+ ", seudent_photo=" + seudent_photo + ", student_per=" + student_per + "]";
+				+ ", seudent_photo=" + seudent_photo + ", student_per=" + student_per + ", course=" + course
+				+ ", notices=" + notices + "]";
 	}
-	
 }
