@@ -70,6 +70,6 @@ public class DiscussController {
 		String json1 = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
 		m.addAttribute("json", json);
 		m.addAttribute("json1", json1);
-		return "jsp/discuss/discuss";
+		return "discuss/discuss";
 	}
 }

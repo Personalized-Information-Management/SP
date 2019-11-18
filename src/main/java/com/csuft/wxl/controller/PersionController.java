@@ -47,7 +47,7 @@ public class PersionController {
 			str = String.format("{str:'%s',photo:'%s'}", "修改失败", "/img/失败-01.png");
 		}
 		m.addAttribute("json", str);
-		return "jsp/persion/succeed";
+		return "persion/succeed";
 	}
 
 	@RequestMapping("/persion-edit")
@@ -57,7 +57,7 @@ public class PersionController {
 		student = studetService.getStudent(student);
 		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
 		m.addAttribute("json", json);
-		return "jsp/persion/persion-edit";
+		return "persion/persion-edit";
 	}
 
 	@RequestMapping("")
@@ -67,7 +67,7 @@ public class PersionController {
 		student = studetService.getStudent(student);
 		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
 		m.addAttribute("json", json);
-		return "jsp/persion/persion";
+		return "persion/persion";
 	}
 	@ResponseBody
 	@RequestMapping("/upload")

@@ -57,11 +57,10 @@
             <li class="breadcrumb-item active"><a>来自正在学习课程的消息</a></li>
             <div class="offset-5">未读消息：</div>
         </ol>
-        {{items.notices[0].notice_content}}
-        <div v-for="item in items.notices">
+        <div v-for="item in items">
             <div class="card mt-4">
                 <div class="card-body">
-                    <p class="card-text">item.notice_content</p>
+                    <p class="card-text" v-html="item.notice_content"></p>
                 </div>
                 <div class="card-footer text-muted">
                     Footer
@@ -73,7 +72,7 @@
         var data = { "course": null, "id": "1", "notices": [{ "id": "1", "notice_content": "<p>我的世界，你的世界，他的世界</p>", "notice_courseid": "1", "notice_time": "1573794990000" }, { "id": "2", "notice_content": "<p>请完成第二张的内容</p>", "notice_courseid": "1", "notice_time": "1573794990000" }, { "id": "3", "notice_content": "<p>请完成第三张的内容</p>", "notice_courseid": "1", "notice_time": "1573794990000" }, { "id": "4", "notice_content": "<p>请完成第三张的内容</p>", "notice_courseid": "5", "notice_time": "1573794990000" }, { "id": "5", "notice_content": "<p>请完成第三张的内容</p>", "notice_courseid": "8", "notice_time": "1573794990000" }], "seudent_photo": null, "student_col": null, "student_majo": null, "student_name": null, "student_per": null, "student_phone": null, "student_sex": null };
         var app = new Vue({
             el: "#app1",
-            data: { items: data },
+            data: { items: data.notices },
         })
     </script>
 

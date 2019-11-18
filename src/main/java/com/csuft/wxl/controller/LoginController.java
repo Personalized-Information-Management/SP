@@ -1,11 +1,16 @@
 package com.csuft.wxl.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,18 +24,26 @@ import com.csuft.wxl.service.UserService;
 
 @Controller
 public class LoginController {
+	@ResponseBody
+	@RequestMapping("/path")
+	public String name(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException {
+
+		File path = new File(ResourceUtils.getURL("classpath:").getPath());
+
+		String rootPath = Class.class.getClass().getResource("/").getPath();
+		String rootPath2 = ClassUtils.getDefaultClassLoader().getResource("").getPath();
+		System.out.println("classpath的地址" + path.getAbsolutePath());
+		System.out.println("根路径" + rootPath);
+		System.out.println("根路径" + rootPath2);
+		return null;
+	}
 
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/")
-	public String index() {
-		return "forward:index";
-	}
-
-	@RequestMapping("/index")
+	@RequestMapping({ "/index", "/" })
 	public String indexRequest() {
-		return "/login.html";
+		return "login";
 	}
 
 	@Autowired
@@ -42,6 +55,7 @@ public class LoginController {
 		user.setId(request.getParameter("name"));
 		user.setUser_per(request.getParameter("role"));
 		user.setUser_pwd(request.getParameter("password"));
+		System.out.println(user);
 		String pwd = userService.getPassword(user);
 		if (user.getId() != null && user.getUser_pwd().equals(pwd)) {
 			if (user.getUser_per().equals("1")) {
@@ -53,16 +67,17 @@ public class LoginController {
 				student.setId((String) user.getId());
 				student = studentService.getStudent(student);
 				m.addAttribute("photo", "\"" + student.getSeudent_photo() + "\"");
-				return "jsp/zhuye";
+				return "zhuye";
 			} else if (user.getUser_per().equals("2")) {
-				return "jsp/teacher/zhuye";
+				return "teacher/zhuye";
 			} else {
-				return "jsp/login";
+				return "login";
 			}
 			// 输出结果为空
 		} else {
-			return "jsp/login";
+			return "login";
 		}
 
 	}
+
 }

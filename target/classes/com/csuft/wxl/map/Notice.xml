@@ -14,9 +14,35 @@
 			<result column="notice_content" property="notice_content" />
 		</collection>
 	</resultMap>
-	<select id="selectNotice" resultMap="StudentNotice" parameterType="Student">
+	<!-- 属性id映射数据库列nitice_id -->
+	<resultMap type="Notice" id="NoticeId">
+		<id column="nitice_id" property="id"></id>
+		<result column="notice_courseid" property="notice_courseid" />
+		<result column="notice_time" property="notice_time" />
+		<result column="notice_content" property="notice_content" />
+		<result column="student_id" property="student_id" />
+		<result column="notice_read" property="notice_read" />
+	</resultMap>
+	<select id="selectNotice" resultMap="StudentNotice"
+		parameterType="Student">
 		select * from (SELECT student_id,course_id FROM
-		student_course where student_id=#{id} and study=1) as course join notice
+		student_course where student_id=#{id} and study=1) as course join
+		notice
 		on notice.notice_courseid=course.course_id
+	</select>
+	<select id="selectNoticeStateById" resultMap="NoticeId">
+		select
+		course2.student_id,course2.nitice_id,course2.notice_courseid,notice_time,notice_content,notice_read
+		from (select student_id,course_id,id
+		nitice_id,notice_courseid,notice_time,notice_content from (SELECT
+		student_id,course_id FROM
+		student_course where student_id=1 and
+		study=1) as course1 join notice
+		on
+		notice.notice_courseid=course1.course_id) as course2 left join
+		student_notice on
+		course2.notice_courseid=student_notice.notice_courseid and
+		course2.student_id=student_notice.student_id and
+		student_notice.nitice_id=course2.nitice_id
 	</select>
 </mapper>

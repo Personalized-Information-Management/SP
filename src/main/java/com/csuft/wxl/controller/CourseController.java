@@ -27,7 +27,7 @@ public class CourseController {
 		List<Course> list=courseService.getAllListPart();
 		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
 		m.addAttribute("json", json);
-		return "jsp/course";
+		return "course";
 		
 	}
 
@@ -43,7 +43,7 @@ public class CourseController {
 		String json = JSON.toJSONString(course, SerializerFeature.DisableCircularReferenceDetect);
 		System.out.println(json);
 		m.addAttribute("json", json);
-		return "jsp/course/course-details";
+		return "course/course-details";
 		
 	}
 	//取消收藏
@@ -51,14 +51,14 @@ public class CourseController {
 	public String name6(HttpServletRequest request, HttpServletResponse response,Model m) {
 		//字段cid
 	
-		return "jsp/course/course-details";
+		return "course/course-details";
 		
 	}
 	@RequestMapping("/details-continue")
 	public String name5(HttpServletRequest request, HttpServletResponse response,Model m) {
 		//字段cid
 	
-		return "jsp/course/course-details";
+		return "course/course-details";
 		
 	}
 	@Autowired
@@ -71,7 +71,7 @@ public class CourseController {
 		student=studentService.getStudentStudysCourse(student);
 		String json = JSON.toJSONString(student.getCourse(), SerializerFeature.DisableCircularReferenceDetect);
 		m.addAttribute("json", json);
-		return "jsp/course/course-study";
+		return "course/course-study";
 	}
 
 	@RequestMapping("/studied")
@@ -82,7 +82,7 @@ public class CourseController {
 		student = studentService.getStudentFinishCourse(student);
 		String json = JSON.toJSONString(student.getCourse(), SerializerFeature.DisableCircularReferenceDetect);
 		m.addAttribute("json", json);
-		return "jsp/course/course-studied";
+		return "course/course-studied";
 
 	}
 
@@ -94,7 +94,7 @@ public class CourseController {
 		student = studentService.getStudentCollectCourse(student);
 		String json = JSON.toJSONString(student.getCourse(), SerializerFeature.DisableCircularReferenceDetect);
 		m.addAttribute("json", json);
-		return "jsp/course/course-collect";
+		return "course/course-collect";
 	}
 
 }

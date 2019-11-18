@@ -34,7 +34,7 @@ public class HomeController {
 		request.getSession().setAttribute("name", null);
 		request.getSession().setAttribute("id", null);
 		request.getSession().setAttribute("per", null);
-		return "jsp/logout";
+		return "logout";
 	}
 	@Autowired
 	StudentService studentService;
@@ -47,7 +47,7 @@ public class HomeController {
 		student.setId((String)request.getSession().getAttribute("id"));
 		student = studentService.getStudent(student);
 		m.addAttribute("photo", "\""+student.getSeudent_photo()+"\"");
-		return "jsp/zhuye";
+		return "zhuye";
 	}
 	@Autowired
 	CourseService courseService;
@@ -56,7 +56,7 @@ public class HomeController {
 		List<Course> list=courseService.getAllListPart();
 		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
 		m.addAttribute("json", json);
-		return "jsp/course";
+		return "course";
 	}
 
 }

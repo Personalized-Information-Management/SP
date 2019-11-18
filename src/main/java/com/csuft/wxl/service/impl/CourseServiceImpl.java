@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.csuft.wxl.map.CourseMap;
 import com.csuft.wxl.map.UserMap;
 import com.csuft.wxl.pojo.Course;
+import com.csuft.wxl.pojo.Notice;
 import com.csuft.wxl.pojo.User;
 import com.csuft.wxl.service.CourseService;
 import com.csuft.wxl.service.UserService;
@@ -48,6 +49,12 @@ public class CourseServiceImpl implements CourseService {
 	public String getStudy(Course course) {
 		// TODO Auto-generated method stub
 		return courseMap.selectCourseStudy(course);
+	}
+
+	@Override
+	public Course getCourseByNotice(Notice notice) {
+		// TODO Auto-generated method stub
+		return courseMap.selectCourseRetuenCourseidCourseName(notice);
 	}
 
 }

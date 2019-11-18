@@ -20,6 +20,7 @@ import com.csuft.wxl.map.StudentMap;
 import com.csuft.wxl.map.UserMap;
 import com.csuft.wxl.pojo.Course;
 import com.csuft.wxl.pojo.Discuss;
+import com.csuft.wxl.pojo.Notice;
 import com.csuft.wxl.pojo.Student;
 import com.csuft.wxl.pojo.UploadImageFile;
 import com.csuft.wxl.pojo.User;
@@ -35,6 +36,9 @@ import cn.hutool.core.text.csv.CsvReader;
 import cn.hutool.core.text.csv.CsvRow;
 import cn.hutool.core.text.csv.CsvUtil;
 import cn.hutool.core.util.CharsetUtil;
+
+//修改数据库密码，用户
+//修改资源映射路径
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -59,28 +63,49 @@ public class SpApplicationTests {
 	StudentMap studentMap;
 	@Autowired
 	DiscussService discussService;
-	
+
 	@Autowired
 	DiscussMap discussMap;
 	@Autowired
 	NoticeMap noticeMap;
 	@Autowired
 	NoticeService noticeService;
+//	@Test
+	public void name18() {
+		
+		List<Notice> list = noticeMap.selectNoticeStateById();
+		for (Notice notice : list) {
+			String json = JSON.toJSONString(notice, SerializerFeature.WriteMapNullValue);
+			System.out.println(json);
+		}
+	}
+
+	@Test
 	public void name17() {
+		//获取一个学生的所有课程通知
 		Student student = new Student();
 		student.setId("1");
 		student = noticeService.getNotice(student);
+		List<Course> list=new ArrayList<Course>();
+		for (Notice notice : student.getNotices()) {
+			Course course=new Course();
+			course=courseService.getCourseByNotice(notice);
+			list.add(course);
+		}
+		student.setCourse(list);
 		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
 		System.out.println(json);
 	}
+
 //	@Test
 	public void name16() {
-		Student student=new Student();
-		student=noticeMap.selectNotice();
+		Student student = new Student();
+		student.setId("1");
+		student = noticeMap.selectNotice(student);
 		String json = JSON.toJSONString(student, SerializerFeature.WriteMapNullValue);
 		System.out.println(json);
 	}
-	
+
 //	@Test
 	public void name15() {
 		Discuss discuss = new Discuss();
@@ -91,11 +116,11 @@ public class SpApplicationTests {
 		Date date = new Date();
 		discuss.setDis_time(String.valueOf(date.getTime()));
 		System.out.println(discuss.toString());
-		int a=discussService.setDis(discuss);
+		int a = discussService.setDis(discuss);
 		System.out.println("\n\n\n");
-		if (a==1) {
+		if (a == 1) {
 			System.out.println("修改成功");
-		}else {
+		} else {
 			System.out.println("修改失败");
 		}
 		System.out.println("\n\n\n");
@@ -103,13 +128,12 @@ public class SpApplicationTests {
 
 //	@Test
 	public void name14() {
-		
-		List<Discuss> list=discussMap.selectAllDisAndAuthor();
+		List<Discuss> list = discussMap.selectAllDisAndAuthor();
 		String json = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue);
-		Student student=new Student();
+		Student student = new Student();
 		student.setId("1");
 		student.setStudent_per("1");
-		student=studentService.getStudent(student);
+		student = studentService.getStudent(student);
 		System.out.println();
 		System.out.println(student);
 		System.out.println();

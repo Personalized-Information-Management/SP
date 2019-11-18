@@ -56,6 +56,12 @@
 		where course_id=#{id} and
 		(study=1 or study=2)
 	</select>
+	<!-- 更具消息的id获取课程信息，返回课程id 和课程名 -->
+	<select id="selectCourseRetuenCourseidCourseName"
+		parameterType="Notice" resultType="Course" >
+		select id,course_name from course
+		where id=#{notice_courseid}
+	</select>
 	<insert id="insertOne" parameterType="Course">
 		insert into course(id,
 		course_time, course_name, course_introduce,
@@ -63,4 +69,6 @@
 		course_collect, course_apply, course_teacher)
 		values(#{id},#{course_time},#{course_name},#{course_introduce},#{course_photo},#{course_collect},#{course_apply},#{course_teacher})
 	</insert>
+	
+	
 </mapper>

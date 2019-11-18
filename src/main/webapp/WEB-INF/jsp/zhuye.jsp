@@ -12,8 +12,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="bootstrap-4.3.1/css/bootstrap.min.css">
-<script src="js/vue.JS"></script>
+<link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.min.css">
+<script src="/js/vue.js"></script>
 <style>
 .ff {
 	font: 1.5em sans-serif;
@@ -43,7 +43,7 @@
 		<!-- 导航栏 -->
 		<div>
 			<div class="container">
-				<br> <a href="http://localhost:8080/zhuye">
+				<br> <a href="/zhuye">
 					<p>
 						<i><strong>个性化学习平台</strong></i>
 					</p>
@@ -67,10 +67,8 @@
 										href="/zhuye">主页</a></li>
 									<li><a class="nav-link" href="/course">课程</a></li>
 									<li><a class="nav-link" href="#">作业</a></li>
-									<li><a class="nav-link" href="#">成长</a></li>
-									<li><a class="nav-link" href="#">教师通知</a></li>
+									<li><a class="nav-link" href="/notice">课程通知</a></li>
 									<li><a class="nav-link" href="/dis">讨论区</a></li>
-									<li><a class="nav-link" href="#">活动</a></li>
 									<li><a class="nav-link" href="/logins">切换账号</a></li>
 									<li><a class="nav-link " href="/logout">退出登录</a></li>
 								</ul>
@@ -104,20 +102,20 @@
 					<div class="col-lg-2 col-md-4  col-sm-4 col-6"
 						style="text-align: center;">
 						<a href="/persion"><img style="width: 100px;"
-							src="img/个人信息.png" alt="">
+							src="/img/个人信息.png" alt="">
 							<p>个人信息</p> </a>
 					</div>
 					<div class="col-lg-2 col-md-4 col-sm-4 col-6 "
 						style="text-align: center;">
 						<a href="/course/studying"> <img style="width: 100px;"
-							src="img/课程管理.png" alt="">
+							src="/img/课程管理.png" alt="">
 							<p>正在学习</p>
 						</a>
 					</div>
 					<div class="col-lg-2 col-md-4 col-sm-4 col-6"
 						style="text-align: center;">
 						<a href="/dis"> <img style="width: 100px;"
-							src="img/作业.png" alt="">
+							src="/img/作业.png" alt="">
 							<p>消息</p>
 						</a>
 					</div>
@@ -164,9 +162,9 @@
 	</script>
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
-	<script src="bootstrap-4.3.1/popper.min.js "></script>
-	<script src="bootstrap-4.3.1/js/bootstrap.min.js "></script>
+	<script src="/bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
+	<script src="/bootstrap-4.3.1/popper.min.js "></script>
+	<script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
 </body>
 
 </html>

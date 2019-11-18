@@ -68,33 +68,13 @@
           <div class="navbar-collapse collapse show" id="collapsibleNavId">
             <div class="container ">
               <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/zhuye">主页</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="/course">课程</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">作业</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">成长</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">教师通知</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">讨论区</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="#">活动</a>
-                </li>
-                <li>
-                  <a class="nav-link" href="/logins">切换账号</a>
-                </li>
-                <li>
-                  <a class="nav-link " href="/logout">退出登录</a>
-                </li>
+                <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
+                <li><a class="nav-link" href="/course">课程</a></li>
+                <li><a class="nav-link" href="#">作业</a></li>
+                <li><a class="nav-link" href="/notice">课程通知</a></li>
+                <li><a class="nav-link" href="/dis">讨论区</a></li>
+                <li><a class="nav-link" href="/logins">切换账号</a></li>
+                <li><a class="nav-link " href="/logout">退出登录</a></li>
               </ul>
             </div>
           </div>

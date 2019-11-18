@@ -3,6 +3,7 @@ package com.csuft.wxl.service;
 import java.util.List;
 
 import com.csuft.wxl.pojo.Course;
+import com.csuft.wxl.pojo.Notice;
 
 public interface CourseService {
 	List<Course> getAllList();
@@ -14,4 +15,6 @@ public interface CourseService {
 	public String getCollect(Course course);
 	
 	public String getStudy(Course course);
+	
+	public Course getCourseByNotice(Notice notice);
 }
