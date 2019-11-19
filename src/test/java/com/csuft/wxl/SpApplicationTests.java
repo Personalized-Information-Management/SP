@@ -18,10 +18,12 @@ import com.csuft.wxl.map.DiscussMap;
 import com.csuft.wxl.map.NoticeMap;
 import com.csuft.wxl.map.StudentMap;
 import com.csuft.wxl.map.UserMap;
+import com.csuft.wxl.map.teacher.TCourseMap;
 import com.csuft.wxl.pojo.Course;
 import com.csuft.wxl.pojo.Discuss;
 import com.csuft.wxl.pojo.Notice;
 import com.csuft.wxl.pojo.Student;
+import com.csuft.wxl.pojo.Teacher;
 import com.csuft.wxl.pojo.UploadImageFile;
 import com.csuft.wxl.pojo.User;
 import com.csuft.wxl.service.CourseService;
@@ -70,6 +72,18 @@ public class SpApplicationTests {
 	NoticeMap noticeMap;
 	@Autowired
 	NoticeService noticeService;
+	
+	@Autowired
+	TCourseMap tcoursemap;
+	@Test
+	public void name19() {
+		Teacher teacher=new Teacher();
+		teacher.setId("1");
+		List<Course> list=tcoursemap.selectAllByTeacherId(teacher);
+		String json = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+		
+	}
 //	@Test
 	public void name18() {
 		
@@ -80,7 +94,7 @@ public class SpApplicationTests {
 		}
 	}
 
-	@Test
+//	@Test
 	public void name17() {
 		//获取一个学生的所有课程通知
 		Student student = new Student();

@@ -92,9 +92,9 @@
 						style="width: 60px; height: 60px;">
 					<div class="media-body my-4">
 						<h6>
-							姓名：<%=request.getSession().getAttribute("name")%></h6>
+							姓名：{{name}}</h6>
 						<p>
-							账号：<%=request.getSession().getAttribute("id")%></p>
+							账号：{{id}}</p>
 
 					</div>
 				</div>
@@ -152,11 +152,13 @@
 		})
 	</script>
 	<script>
-		var photo = ${photo};
+		var data = ${json};
 		new Vue({
 			el : '#app',
 			data : {
-				photo : photo
+				photo : data.photo,
+				name:data.name,
+				id:data.id
 			},
 		})
 	</script>

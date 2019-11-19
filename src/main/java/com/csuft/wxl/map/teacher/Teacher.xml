@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csuft.wxl.map.teacher.TeacherMap">
+	<select id="selectIdNamePhotoByTeacherId" resultType="Teacher" parameterType="Teacher">
+		SELECT id,teacher_name,teacher_photo FROM teacher where id=#{id};
+	</select>
+</mapper>

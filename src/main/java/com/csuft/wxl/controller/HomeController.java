@@ -46,7 +46,9 @@ public class HomeController {
 		Student student=new Student();
 		student.setId((String)request.getSession().getAttribute("id"));
 		student = studentService.getStudent(student);
-		m.addAttribute("photo", "\""+student.getSeudent_photo()+"\"");
+		String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", student.getStudent_name(), student.getId(),
+				student.getSeudent_photo());
+		m.addAttribute("json", json);
 		return "zhuye";
 	}
 	@Autowired

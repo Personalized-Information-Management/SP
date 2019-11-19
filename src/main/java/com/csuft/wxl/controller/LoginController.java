@@ -14,9 +14,13 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.csuft.wxl.pojo.Student;
+import com.csuft.wxl.pojo.Teacher;
 import com.csuft.wxl.pojo.User;
 import com.csuft.wxl.service.StudentService;
+import com.csuft.wxl.service.TeacherService;
 import com.csuft.wxl.service.UserService;
 //
 //login
@@ -48,6 +52,8 @@ public class LoginController {
 
 	@Autowired
 	StudentService studentService;
+	@Autowired
+	TeacherService teacherservice;
 
 	@RequestMapping("/login")
 	public String loginRequest(HttpServletRequest request, HttpServletResponse response, Model m) {
@@ -66,9 +72,20 @@ public class LoginController {
 				Student student = new Student();
 				student.setId((String) user.getId());
 				student = studentService.getStudent(student);
-				m.addAttribute("photo", "\"" + student.getSeudent_photo() + "\"");
+				String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", student.getStudent_name(), student.getId(),
+						student.getSeudent_photo());
+				m.addAttribute("json", json);
 				return "zhuye";
 			} else if (user.getUser_per().equals("2")) {
+				Teacher teacher=new Teacher();
+				teacher.setId((String)user.getId());
+				teacher= teacherservice.getIdAndPhoto(teacher);
+				
+				request.getSession().setAttribute("name", teacher.getTeacher_name());
+				request.getSession().setAttribute("id", user.getId());
+				request.getSession().setAttribute("per", user.getUser_per());
+				String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", teacher.getTeacher_name(), teacher.getId(),teacher.getTeacher_photo());
+				m.addAttribute("json", json);
 				return "teacher/zhuye";
 			} else {
 				return "login";
