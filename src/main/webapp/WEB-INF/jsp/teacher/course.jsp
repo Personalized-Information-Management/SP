@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -58,13 +59,13 @@
                         <div class="navbar-collapse collapse show" id="collapsibleNavId">
                             <div class="container ">
                                 <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                                    <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                                    <li><a class="nav-link" href="/course">课程管理</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="/teacher/zhuye">主页</a></li>
+                                    <li><a class="nav-link" href="/teacher/course">课程管理</a></li>
                                     <li><a class="nav-link" href="#">作业管理</a></li>
-                                    <li><a class="nav-link" href="/notice">课程通知管理</a></li>
-                                    <li><a class="nav-link" href="/dis">讨论区</a></li>
-                                    <li><a class="nav-link" href="/logins">切换账号</a></li>
-                                    <li><a class="nav-link " href="/logout">退出登录</a></li>
+                                    <li><a class="nav-link" href="/#">课程通知管理</a></li>
+                                    <li><a class="nav-link" href="/#">讨论区</a></li>
+                                    <li><a class="nav-link" href="/#">切换账号</a></li>
+                                    <li><a class="nav-link " href="/#">退出登录</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -79,10 +80,10 @@
 
 
             <div class="container">
-             
+
                 <div class="row my-1 col-lg-10">
                     <div class="col-lg-2 col-md-4  col-sm-4 col-6" style="text-align: center;">
-                        <a href="#"><img style="width: 100px;" src="/img/个人信息.png" alt="">
+                        <a href="/teacher/course/published"><img style="width: 100px;" src="/img/个人信息.png" alt="">
                             <p>发布课程</p>
                         </a>
                     </div>
@@ -91,15 +92,7 @@
                             <p>查看已发布课程</p>
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-6" style="text-align: center;">
-                        <a href="#"> <img style="width: 100px;" src="/img/作业.png" alt="">
-                            <p>已发布消息</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-6" style="text-align: center;">
-                        <img style="width: 100px;" src="img/作业.png" alt="">
-                        <p>已布置作业</p>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -118,7 +111,7 @@
         })
     </script>
     <script>
-        var data = ${json};
+        var data = ${ json };
         new Vue({
             el: '#app',
             data: {

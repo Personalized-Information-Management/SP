@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 
@@ -59,13 +57,13 @@
                         <div class="navbar-collapse collapse show" id="collapsibleNavId">
                             <div class="container ">
                                 <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                                    <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                                    <li><a class="nav-link" href="">课程管理</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="/teacher/zhuye">主页</a></li>
+                                    <li><a class="nav-link" href="#">课程管理</a></li>
                                     <li><a class="nav-link" href="#">作业管理</a></li>
-                                    <li><a class="nav-link" href="">课程通知管理</a></li>
-                                    <li><a class="nav-link" href="">讨论区</a></li>
-                                    <li><a class="nav-link" href="">切换账号</a></li>
-                                    <li><a class="nav-link " href="">退出登录</a></li>
+                                    <li><a class="nav-link" href="/#">课程通知管理</a></li>
+                                    <li><a class="nav-link" href="/#">讨论区</a></li>
+                                    <li><a class="nav-link" href="/#">切换账号</a></li>
+                                    <li><a class="nav-link " href="/#">退出登录</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -80,37 +78,19 @@
 
 
             <div class="container">
-                <div class="media p-3">
-                    <img :src="photo" onerror="javascript:this.src='/images/student/1.png'" alt="John Doe"
-                        class="mr-3 mt-3 rounded-circle" style="width: 60px; height: 60px;">
-                    <div class="media-body my-4">
-                        <h6>
-                            姓名：{{name}}</h6>
-                        <p>
-                            账号：{{id}}</p>
 
-                    </div>
-                </div>
                 <div class="row my-1 col-lg-10">
                     <div class="col-lg-2 col-md-4  col-sm-4 col-6" style="text-align: center;">
-                        <a href="#"><img style="width: 100px;" src="/img/个人信息.png" alt="">
-                            <p>个人信息</p>
+                        <a href="/"><img style="width: 100px;" src="/img/个人信息.png" alt="">
+                            <p>发布课程</p>
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-6 " style="text-align: center;">
-                        <a href="/teacher/course/published-course"> <img style="width: 100px;" src="/img/课程管理.png" alt="">
-                            <p>已发布课程</p>
+                        <a href="/teacher/published-course"> <img style="width: 100px;" src="/img/课程管理.png" alt="">
+                            <p>查看已发布课程</p>
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-6" style="text-align: center;">
-                        <a href="#"> <img style="width: 100px;" src="/img/作业.png" alt="">
-                            <p>已发布消息</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-6" style="text-align: center;">
-                        <img style="width: 100px;" src="img/作业.png" alt="">
-                        <p>已布置作业</p>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -129,7 +109,7 @@
         })
     </script>
     <script>
-        var data = ${json};
+        var data = ${ json };
         new Vue({
             el: '#app',
             data: {

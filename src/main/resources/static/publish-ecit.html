@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>创建课程</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/js/vue.js"></script>
+    <script src="/wangEditor/wangEditor.js"></script>
+    <style>
+        .tab {
+            display: none
+        }
+
+        .tab-active {
+            display: block
+        }
+
+        .text {
+            min-height: 350px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app1" class="container">
+        <div name="primary-title">
+
+        </div>
+        <div v-for="(item, index) in model">
+            第{{index+1}}章
+            <input type="text" v-model='item.index1["title"+item.num]'>
+            <button @click="remove(index)">删除</button>
+            <div :id='"text"+item.num' class="text">
+            </div>
+        </div>
+        <label for="title">标题</label>
+        <input type="text" id="title" class="form-control" name="" v-model="title" placeholder="">
+        <button @click="add(title)">添加标题</button><button @click="yulan">预览</button>
+        <div v-for="(item, index) in editor">
+            {{item.txt.text()}}
+        </div>
+    </div>
+    <script>
+
+        var E = window.wangEditor;
+        var app = new Vue({
+            el: "#app1",
+            data: {
+                title: '',
+                id: new Array(),
+                model: new Array(),
+                content: new Array(),
+                count: 0,
+                editor: new Array(),
+                text:new Array(),
+            },
+            methods: {
+                add: function (title) {
+                    // this.data=event.currentTarget;
+                    // this.per=event.currentTarget.previousElementSibling.innerHTML
+                    this.count++;
+                    var a = '{"title' + this.count + '":"' + this.title + '","content' + this.count + '":""}';
+                    console.log(a)
+                    var json = JSON.parse(a);
+                    this.model.push({
+                        num: this.count,
+                        index1: json,
+                    });
+                    editor = this.editor;
+                    this.$nextTick(function () {
+
+                        var editor1 = new E('#text' + this.count);
+                        editor.push(editor1);
+                        count = this.count;
+                        editor = this.editor;
+                        editor1.create();
+                    })
+                },
+                yulan: function () {
+                    for(var i=0;i<this.model;i++){
+                        text.push(editor[this.model].txt.html());
+                    }
+                },
+                remove: function (value) {
+                    this.model.splice(value, 1);
+                    console.log(value);
+                    this.towTitle.splice(value, 1);
+                }
+            },
+        });
+        function editor1() {
+        }
+    </script>
+
+
+    <br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">返回</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">当前课程名</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="app" class="row">
+
+
+
+        <div class="col-lg-3 col-sm-12">
+            <div class="card">
+                <div v-for="(item, i) in info" class="card-body">
+                    <h4 class="card-title">{{ i+1 }}、{{ item.title }}
+                        <button v-on:click="sign(i)" @click="rmtitle()" type="button"
+                            class="btn btn-outline-danger float-right">
+                            X
+                        </button>
+                    </h4>
+                    <ul class="list-group list-group-flush">
+                        <a v-for="(li, j) in item.list" class="dropdown-item" href="#">
+                            {{ i+1 }}.{{ j+1 }}丨{{ li }}
+                            <button v-on:click="rmsign(i,j)" @click="remove()" type="button"
+                                class="btn btn-outline-danger btn-sm float-right">
+                                x
+                            </button>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+
+                    <button v-on:click="sign(i)" type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#littleModal">
+                        添加小节+
+                    </button>
+
+                    <div class="dropdown-divider"></div>
+
+
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#titleModal">
+                    添加章节+
+                </button>
+
+                <!-- 添加小节模态框 -->
+                <div class="modal fade" id="littleModal">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">请输入小节标题</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    &times;
+                                </button>
+                            </div>
+
+                            <!-- 模态框主体 -->
+                            <div class="modal-body">
+                                <input type="text" class="form-control" v-model="text" />
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button @click="Createlist();Creatediv()" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">
+                                    确定
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 添加章节模态框 -->
+                <div class="modal fade" id="titleModal">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">请输入章节标题</h4>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    &times;
+                                </button>
+                            </div>
+
+                            <!-- 模态框主体 -->
+                            <div class="modal-body">
+                                <input type="text" class="form-control" v-model="card" />
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button @click="CreateChapter()" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">
+                                    确定
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-1 col-sm-0"></div>
+        <div class="col-lg-3">
+            <div v-for="(message, index) in divnum">
+                <div style="width: 600px;height: 500px;" class="mt-5">
+                    <input type="file">
+                    <iframe height="500" width="600" frameborder="0" scrolling="no" src="" allowfullscreen="true"
+                        webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                card: undefined,
+                info: new Array(),
+                divnum: new Array(),
+                text: undefined,
+                n: undefined,
+                m: undefined,
+            },
+            methods: {
+                //创建章节标题
+                CreateChapter: function () {
+                    this.info.push(
+                        {
+                            title: this.card,
+                            list: new Array()
+                        }
+                    )
+                    this.card = undefined;
+                },
+
+                //创建小节标题
+                Createlist: function () {
+                    this.info[this.n].list.push(this.text);
+                    this.n = undefined;
+                    this.text = undefined;
+                },
+
+                //创建div数据
+                Creatediv: function () {
+                    this.divnum.push("1");
+                },
+
+                //创建结点标记
+                sign: function (num) {
+                    this.n = num;
+                },
+                rmsign: function (n, m) {
+                    this.n = n;
+                    this.m = m;
+                },
+
+                //创建删除功能
+                rmtitle: function () {
+                    this.info.splice(this.n, 1);
+                    this.n = undefined;
+                },
+                remove: function () {
+                    this.info[this.n].list.splice(this.m, 1);
+                    this.n = undefined;
+                    this.m = undefined;
+                },
+            },
+        })
+
+
+
+
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
