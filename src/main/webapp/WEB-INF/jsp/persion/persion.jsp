@@ -142,7 +142,6 @@
           };
           var formData = new FormData;
           formData.append("image", this.files);
-          formData.append("id", "1");
           axios.post("/persion/upload", formData)
             .then(res => {
               alert("上传成功");

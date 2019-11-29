@@ -83,8 +83,10 @@ public class LoginController {
 				
 				request.getSession().setAttribute("name", teacher.getTeacher_name());
 				request.getSession().setAttribute("id", user.getId());
+				System.out.println(user.getId());
 				request.getSession().setAttribute("per", user.getUser_per());
 				String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", teacher.getTeacher_name(), teacher.getId(),teacher.getTeacher_photo());
+				System.out.println(json);
 				m.addAttribute("json", json);
 				return "teacher/zhuye";
 			} else {

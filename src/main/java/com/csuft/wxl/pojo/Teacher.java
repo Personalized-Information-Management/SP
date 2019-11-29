@@ -1,5 +1,7 @@
 package com.csuft.wxl.pojo;
 
+import java.util.List;
+
 public class Teacher {
 	String id;
 	String teacher_name;
@@ -8,13 +10,40 @@ public class Teacher {
 	String teacher_photo;
 	String teacher_phone;
 	String teacher_per;
+	String teacher_coll;
+	String teacher_rank;
+	
+	public String getTeacher_rank() {
+		return teacher_rank;
+	}
 
+	public void setTeacher_rank(String teacher_rank) {
+		this.teacher_rank = teacher_rank;
+	}
+
+	public String getTeacher_coll() {
+		return teacher_coll;
+	}
+
+	public void setTeacher_coll(String teacher_coll) {
+		this.teacher_coll = teacher_coll;
+	}
+
+	List<Course> Courses; 
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public List<Course> getCourses() {
+		return Courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		Courses = courses;
 	}
 
 	public String getTeacher_name() {
@@ -69,8 +98,8 @@ public class Teacher {
 	public String toString() {
 		return "Teacher [id=" + id + ", teacher_name=" + teacher_name + ", teacher_sex=" + teacher_sex
 				+ ", teacher_birth=" + teacher_birth + ", teacher_photo=" + teacher_photo + ", teacher_phone="
-				+ teacher_phone + ", teacher_per=" + teacher_per + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ teacher_phone + ", teacher_per=" + teacher_per + ", teacher_coll=" + teacher_coll + ", teacher_rank="
+				+ teacher_rank + ", Courses=" + Courses + "]";
 	}
 
 }

@@ -20,6 +20,7 @@
     .toolbar {
       border: 1px solid rgb(0, 0, 0);
     }
+
     .text {
       border: 1px solid rgb(2, 2, 2);
       height: 400px;
@@ -28,7 +29,65 @@
 </head>
 
 <body>
+  <div>
+    <button data-toggle="modal" data-target="#myModal">按钮</button>
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- 模态框头部 -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- 模态框主体 -->
+          <div class="modal-body">
+            <div id="app1" class="container">
+              <small id="helpId" class="form-text text-muted">通知内容</small>
+              <div id="editor1" class="text" style="z-index: 99999;"></div>
+              <button class="btn mt-2 bg-primary"> 发布</button>
+              <button class="btn mt-2 bg-primary" onclick="editor.txt.clear();">清空</button>
+            </div>
+          </div>
+          <!-- 模态框底部 -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var E = window.wangEditor;
 
+      var editor = new E(document.getElementById('editor1'))
+      //创建之前自定义视图
+      editor.customConfig.menus = [
+        'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'emoticon',  // 表情
+        'image',  // 插入图片
+        'table',  // 表格
+        // 'video',  // 插入视频
+        'code',  // 插入代码
+        'undo',  // 撤销
+        'redo'  // 重复
+      ];
+
+    
+      editor.create();
+
+
+    </script>
   </div>
   <div class="form-group">
     <small id="helpId" class="form-text text-muted">标题</small>

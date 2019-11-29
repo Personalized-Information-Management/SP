@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <title>主页</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.min.css">
+    <script src="/js/vue.js"></script>
+    <style>
+        .ff {
+            font: 1.5em sans-serif;
+        }
+
+        .jx {
+            border-bottom: 2px solid #3b4d431e;
+            margin-top: 5px;
+        }
+
+        .bg {
+            margin-top: 50px;
+        }
+
+        /*与绿色边框的距离*/
+        .block1 {
+            width: 265px;
+            height: 287px;
+            margin: auto;
+            border: 1px solid #00ff73;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <a href="#top" style="position: fixed;bottom: 20px;right: 100px;">返回顶部</a>
+        <!-- 导航栏 -->
+        <div>
+            <div class="container">
+                <br> <a href="/teacher/zhuye">
+                    <p>
+                        <i><strong>个性化学习平台</strong></i>
+                    </p>
+                </a>
+            </div>
+            <div class="container-fluid bg-info text-white">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
+                        <a class="navbar-brand">&nbsp;</a>
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                            data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="true"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse show" id="collapsibleNavId">
+                            <div class="container ">
+                                <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
+                                    <li class="nav-item active"><a class="nav-link" href="/teacher/zhuye">主页</a></li>
+                                    <li><a class="nav-link" href="/teacher/course">课程管理</a></li>
+                                    <li><a class="nav-link" href="#">作业管理</a></li>
+                                    <li><a class="nav-link" href="/#">课程通知管理</a></li>
+                                    <li><a class="nav-link" href="/#">讨论区</a></li>
+                                    <li><a class="nav-link" href="/#">切换账号</a></li>
+                                    <li><a class="nav-link " href="/#">退出登录</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 课程展示 -->
+        <div class="container">
+            <div><a name="top"></a> 章节</div>
+
+            <div v-for="(item, index) in data">
+                <h3>
+                    <div><a :href='"#"+index'> 第{{index+1}}章|{{item.title}}</a></div>
+                </h3>
+            </div>
+            <hr>
+            <br>
+           
+            <div v-for="(item, index) in data">
+                <h3>
+                    <div><a :name="index"></a> 第{{index+1}}章|{{item.title}}</div>
+                </h3>
+                <div v-html="item.content"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <script>
+        var data = { data: { "collect": null, "course_content": "[{\"count\":0,\"title\":\"小雅·车舝\",\"content\":\"<p>间关车之舝兮，思娈季女逝兮。匪饥匪渴，德音来括。虽无好友？式燕且喜。<br>依彼平林，有集维鷮。辰彼硕女，令德来教。式燕且誉，好尔无射。<br>虽无旨酒？式饮庶几。虽无嘉肴？式食庶几。虽无德与女？式歌且舞？<br>陟彼高冈，析其柞薪。析其柞薪，其叶湑兮。鲜我觏尔，我心写兮。<br>高山仰止，景行行止。四牡騑騑，六辔如琴。觏尔新婚，以慰我心。&nbsp;&nbsp;<br></p><img src=\\\"//images/course/gXbW43ydk9/HcvGEApr5D.png\\\">\"},{\"count\":1,\"title\":\"风入松·归鞍尚欲小徘徊\",\"content\":\"<p>归鞍尚欲小徘徊。逆境难排。人言酒是消忧物，奈病余孤负金罍。萧瑟捣衣时候，凄凉鼓缶情怀。<br>远林摇落晚风哀，野店犹开。多情惟是灯前影，伴此翁同去同来。逆旅主人相问，今回老似前回。&nbsp;&nbsp;<br></p>\"},{\"count\":2,\"title\":\"qwer\",\"content\":\"<p>qwer</p>\"}]", "course_folder": null, "course_hour": null, "course_introduce": null, "course_name": null, "course_photo": null, "course_state": null, "course_teacher": null, "course_teacher_name": null, "course_time": null, "id": "1", "study": null } };
+        var content = JSON.parse(data.data.course_content);
+        var app = new Vue({
+            el: "#app",
+            data: {
+                data: content,
+
+            }
+        });
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
+    <script src="/bootstrap-4.3.1/popper.min.js "></script>
+    <script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
+
+</body>
+
+</html>

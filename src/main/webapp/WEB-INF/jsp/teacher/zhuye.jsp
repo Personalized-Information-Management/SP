@@ -59,11 +59,10 @@
                         <div class="navbar-collapse collapse show" id="collapsibleNavId">
                             <div class="container ">
                                 <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                                    <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                                    <li><a class="nav-link" href="">课程管理</a></li>
-                                    <li><a class="nav-link" href="#">作业管理</a></li>
-                                    <li><a class="nav-link" href="">课程通知管理</a></li>
-                                    <li><a class="nav-link" href="">讨论区</a></li>
+                                    <li class="nav-item active"><a class="nav-link" href="/teacher/zhuye">主页</a></li>
+                                    <li><a class="nav-link" href="/teacher/course">课程管理</a></li>
+                                    <li><a class="nav-link" href="/teacher/course/notice-course">作业通知</a></li>
+                                    <li><a class="nav-link" href="">讨论圈子</a></li>
                                     <li><a class="nav-link" href="">切换账号</a></li>
                                     <li><a class="nav-link " href="">退出登录</a></li>
                                 </ul>
@@ -77,8 +76,6 @@
 
         <!-- 导航块 -->
         <div class="container">
-
-
             <div class="container">
                 <div class="media p-3">
                     <img :src="photo" onerror="javascript:this.src='/images/student/1.png'" alt="John Doe"
@@ -93,12 +90,13 @@
                 </div>
                 <div class="row my-1 col-lg-10">
                     <div class="col-lg-2 col-md-4  col-sm-4 col-6" style="text-align: center;">
-                        <a href="#"><img style="width: 100px;" src="/img/个人信息.png" alt="">
+                        <a href="/teacher/persion"><img style="width: 100px;" src="/img/个人信息.png" alt="">
                             <p>个人信息</p>
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-6 " style="text-align: center;">
-                        <a href="/teacher/course/published-course"> <img style="width: 100px;" src="/img/课程管理.png" alt="">
+                        <a href="/teacher/course/published-course"> <img style="width: 100px;" src="/img/课程管理.png"
+                                alt="">
                             <p>已发布课程</p>
                         </a>
                     </div>
@@ -108,7 +106,7 @@
                         </a>
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-4 col-6" style="text-align: center;">
-                        <img style="width: 100px;" src="img/作业.png" alt="">
+                        <img style="width: 100px;" src="/img/作业.png" alt="">
                         <p>已布置作业</p>
                     </div>
                 </div>
@@ -129,7 +127,7 @@
         })
     </script>
     <script>
-        var data = ${json};
+        var data = ${ json };
         new Vue({
             el: '#app',
             data: {

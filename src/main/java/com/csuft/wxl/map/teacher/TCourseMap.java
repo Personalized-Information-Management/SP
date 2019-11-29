@@ -12,4 +12,13 @@ import com.csuft.wxl.pojo.Teacher;
 public interface TCourseMap {
 	public List<Course> selectAllByTeacherId(Teacher teacher);
 
+	public int selectAllByTeacherId_count(Teacher teacher);
+
+	public Course selectNoticeCourseByNoticeId(Notice notice);
+
+	public int selectNoticeCourseByNoticeId_count(Notice notice);
+	
+	public Course selectCourseByCourseId(Course course);
+	//删除课程
+	public int deleteCourseById(Notice notice);
 }

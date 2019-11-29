@@ -3,9 +3,12 @@ package com.csuft.wxl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.RandomStringUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -15,6 +18,43 @@ import com.csuft.wxl.pojo.Notice;
 import com.csuft.wxl.pojo.Student;
 
 public class test1 {
+	public static void main9(String[] args) {
+//		时间
+		Date date=new Date();
+		System.out.println(date.getTime());
+	}
+
+	public static void main8(String[] args) {
+		List<Notice> list = new ArrayList<Notice>();
+		String json = JSON.toJSONString(list, SerializerFeature.WriteMapNullValue);
+		System.out.println(json);
+
+	}
+
+	public static void main7(String[] args) {
+		String str = "/images/course/yvnCjsH1rz";
+		String[] str2 = str.split("/");
+		System.out.println(str2[str2.length - 1]);
+	}
+
+	public static void main6(String[] args) {
+//		String folder = RandomStringUtils.randomAlphanumeric(10);
+		String folder = "a7ZOmCgTqV";
+		File file = new File("D:/img/course/" + folder);
+		file.mkdirs();
+		System.out.println(file.getName());
+	}
+
+	public static void main5(String[] args) {
+		Date date = new Date();
+		System.out.println(date.getTime());
+	}
+
+	public static void main4(String[] args) {
+		String string = "sdfqdf.jpg";
+		String[] strings = string.split("[.]");
+		System.out.println(strings[strings.length - 1]);
+	}
 
 	public static void main3(String[] args) {
 		Student student = new Student();
@@ -32,10 +72,10 @@ public class test1 {
 		notice2.setId("4");
 		notices.add(notice1);
 		notices.add(notice2);
-		
-		List<Map> list=new ArrayList<Map>();
-		for (int i=0;i<notices.size();i++) {
-			Map<String,Object> map=new HashMap<String,Object>();
+
+		List<Map> list = new ArrayList<Map>();
+		for (int i = 0; i < notices.size(); i++) {
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("courses", courses.get(i));
 			map.put("notices", notices.get(i));
 			list.add(map);

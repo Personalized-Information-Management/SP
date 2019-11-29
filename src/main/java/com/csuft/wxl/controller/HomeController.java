@@ -36,29 +36,21 @@ public class HomeController {
 		request.getSession().setAttribute("per", null);
 		return "logout";
 	}
+
 	@Autowired
 	StudentService studentService;
+
 	@RequestMapping("/zhuye")
-	public String name3(HttpServletRequest request, HttpServletResponse response,Model m) {
+	public String name3(HttpServletRequest request, HttpServletResponse response, Model m) {
 		if (request.getSession().getAttribute("name") == null) {
 			return "forward:index";
 		}
-		Student student=new Student();
-		student.setId((String)request.getSession().getAttribute("id"));
+		Student student = new Student();
+		student.setId((String) request.getSession().getAttribute("id"));
 		student = studentService.getStudent(student);
-		String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", student.getStudent_name(), student.getId(),
-				student.getSeudent_photo());
+		String json = String.format("{\"name\":\"%s\",\"id\":\"%s\",\"photo\":\"%s\"}", student.getStudent_name(),
+				student.getId(), student.getSeudent_photo());
 		m.addAttribute("json", json);
 		return "zhuye";
 	}
-	@Autowired
-	CourseService courseService;
-	@RequestMapping("/course")
-	public String name4(HttpServletRequest request, HttpServletResponse response,Model m) {
-		List<Course> list=courseService.getAllListPart();
-		String json = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
-		m.addAttribute("json", json);
-		return "course";
-	}
-
 }

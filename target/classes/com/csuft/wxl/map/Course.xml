@@ -26,6 +26,11 @@
 		course.id,course_name,teacher_name,course_photo from course join
 		teacher on course.course_teacher=teacher.id
 	</select>
+	<select id="selectAllIdTeacherName_count" resultType="int">
+		select
+		count(*) from course join
+		teacher on course.course_teacher=teacher.id
+	</select>
 	<!-- 更具课程id获取课程的信息 -->
 	<select id="selectCollect" resultMap="CourseCollect"
 		parameterType="Course">
@@ -58,9 +63,22 @@
 	</select>
 	<!-- 更具消息的id获取课程信息，返回课程id 和课程名 -->
 	<select id="selectCourseRetuenCourseidCourseName"
-		parameterType="Notice" resultType="Course" >
-		select id,course_name from course
+		parameterType="Notice" resultType="Course">
+		select id,course_name from
+		course
 		where id=#{notice_courseid}
+	</select>
+	<!-- 判断消息对应的课程是否存在 -->
+	<select id="selectCourseRetuenCourseidCourseName_conut"
+		parameterType="Notice" resultType="int">
+		select count(*) from
+		course
+		where id=#{notice_courseid}
+	</select>
+	<!-- 更具id获取文件夹地址 -->
+	<select id="selectPathById" resultType="String"
+		parameterType="Course">
+		SELECT course_folder FROM sp.course where id=#{id};
 	</select>
 	<insert id="insertOne" parameterType="Course">
 		insert into course(id,
@@ -69,6 +87,65 @@
 		course_collect, course_apply, course_teacher)
 		values(#{id},#{course_time},#{course_name},#{course_introduce},#{course_photo},#{course_collect},#{course_apply},#{course_teacher})
 	</insert>
-	
-	
+	<!-- 自增返回值 -->
+	<insert id="insertReturnId" parameterType="Course">
+		<selectKey resultType="String" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into
+		course(course_name,course_introduce,course_time,course_folder,course_teacher,course_photo,course_state)
+		values(#{course_name},#{course_introduce},#{course_time},#{course_folder},#{course_teacher},#{course_photo},#{course_state})
+	</insert>
+	<insert id="insertContentByid" parameterType="Course">
+		update
+		course set
+		course_content=#{course_content}
+		where id=#{id}
+	</insert>
+	<!-- 查询记录是否存在 -->
+	<select id="selectCollentExist" parameterType="Map"
+		resultType="int">
+		select count(*) from student_course where
+		student_id=#{student_id} and course_id=#{course_id}
+	</select>
+	<!-- 插入一条学生课程记录 -->
+	<insert id="insertOneStudent_idCourse_id" parameterType="Map">
+		insert
+		into student_course set
+		student_id=#{student_id},course_id=#{course_id},collect=1
+	</insert>
+	<!--插入将课程加入学习 -->
+	<insert id="insertOneStudyStudent_idCourse_id"
+		parameterType="Map">
+		insert
+		into student_course set
+		student_id=#{student_id},course_id=#{course_id},study=1
+	</insert>
+	<update id="updateCollectByStudetnCourse" parameterType="Map">
+		update
+		IGNORE student_course set collect=1 where student_id=#{student_id} and
+		course_id=#{course_id}
+	</update>
+	<update id="updateStudyByStudetnCourse" parameterType="Map">
+		update
+		IGNORE student_course set study=1 where student_id=#{student_id} and
+		course_id=#{course_id}
+	</update>
+	<!-- 获取课程内容 -->
+	<select id="selectCourseContentById" parameterType="Course"
+		resultType="Course">
+		select id,course_content from course where id=#{id}
+	</select>
+	<update id="updateStudytoNull" parameterType="Map">
+		update ignore student_course set study=0 where student_id=#{student_id} and
+		course_id=#{course_id}
+	</update>
+	<update id="updateCollecttoNull" parameterType="Map">
+		update ignore student_course set collect=0 where student_id=#{student_id} and
+		course_id=#{course_id}
+	</update>
+
+
+
 </mapper>

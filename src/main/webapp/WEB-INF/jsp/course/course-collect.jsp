@@ -50,37 +50,37 @@
 <body>
   <!-- 导航栏 -->
   <div>
+    <div class="container">
+      <br> <a href="/zhuye">
+        <p>
+          <i><strong>个性化学习平台</strong></i>
+        </p>
+      </a>
+    </div>
+    <div class="container-fluid bg-info text-white">
       <div class="container">
-        <br>
-        <a href="http://localhost:8080/zhuye">
-          <p><i><strong>个性化学习平台</strong></i></p>
-        </a>
-      </div>
-      <div class="container-fluid bg-info text-white">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
-            <a class="navbar-brand">&nbsp;</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-              aria-controls="collapsibleNavId" aria-expanded="true" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse show" id="collapsibleNavId">
-              <div class="container ">
-                <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                  <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                  <li><a class="nav-link" href="/course">课程</a></li>
-                  <li><a class="nav-link" href="#">作业</a></li>
-                  <li><a class="nav-link" href="/notice">课程通知</a></li>
-                  <li><a class="nav-link" href="/dis">讨论区</a></li>
-                  <li><a class="nav-link" href="/logins">切换账号</a></li>
-                  <li><a class="nav-link " href="/logout">退出登录</a></li>
-                </ul>
-              </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
+          <a class="navbar-brand">&nbsp;</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse show" id="collapsibleNavId">
+            <div class="container ">
+              <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
+                <li class="nav-item active"><a class="nav-link" href="/zhuye">我的主页</a></li>
+                <li><a class="nav-link" href="/course">我的课程</a></li>
+                <li><a class="nav-link" href="/notice">课程通知</a></li>
+                <li><a class="nav-link" href="/dis">讨论圈子</a></li>
+                <li><a class="nav-link" href="/logins">切换账号</a></li>
+                <li><a class="nav-link " href="/logout">退出登录</a></li>
+              </ul>
             </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </div>
     </div>
+  </div>
 
   <div class="container">
     <nav class="navbar-nav fixed-bottom " style="color: white;background: #000;height: 50px; ">
@@ -92,21 +92,20 @@
         <div class="row">
           <!--列表区-->
           <div class="list-group col-lg-2 col-sm-2 my-3">
-            <a href="/course/allcourse" class="list-group-item list-group-item-action">
+            <a href="/course/allcourse" class="list-group-item list-group-item-action active">
               所有课程
             </a>
             <a href="/course/studying" class="list-group-item list-group-item-action ">正在学习</a>
-            <a href="/course/collect" class="list-group-item list-group-item-action active">我的收藏</a>
-            <a href="/course/studied" class="list-group-item list-group-item-action">学习完成</a>
+            <a href="/course/collect" class="list-group-item list-group-item-action">我的收藏</a>
           </div>
           <!--课程区-->
           <div class=" col-lg-8 mt-4 col-sm-8 ">
-              <div class="input-group col-lg-5">
-                  <input type="text" class=" form-control" placeholder="搜索课程" aria-describedby="button-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">搜索</button>
-                  </div>
-                </div>
+            <div class="input-group col-lg-5">
+              <input type="text" class=" form-control" placeholder="搜索课程" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">搜索</button>
+              </div>
+            </div>
             <v-card v-for="item in site" v-on:fun="fun" v-bind:subject="item"></v-card>
           </div>
         </div>
@@ -137,19 +136,19 @@
                 <div class="  card-blockquote">{{subject.course_teacher_name}}</div>
               </tr>
             </table>
-			 <a :href="'/course/details-off?cid='+subject.id" class="btn col-3 offset-1 u-font mt-4 mb-4" style="background: rgb(101, 147, 74);">取消收藏</a>
+			 <a :href="'/course/details2?cid='+subject.id" class="btn col-3 offset-1 u-font mt-4 mb-4" style="background: rgb(101, 147, 74);">取消收藏</a>
       </div>
           </a>
               `
       })
-    var data = { site: ${ json }};
+    var data = { site: ${ data }};
     var m = new Vue(
       {
         el: '#abc',   //这是元素
         data: data,
         methods: {
           fun: function (elem) {
-            var url1 = "/course/details?cid=" + elem.currentTarget.firstElementChild.innerHTML;
+            var url1 = "/course/details2?cid=" + elem.currentTarget.firstElementChild.innerHTML;
             window.location.href = location.host + url1;
             url2 = location.host + url1;
           }
@@ -157,22 +156,22 @@
       }
     )
   </script>
- 	<!-- 底部导航 -->
-   <div id="nav_but">
-      <runoob id="a1"></runoob>
-    </div>
-    <script src="/component/nav-button.js"></script>
-    <script>
-      new Vue({
-        el: '#nav_but',
-        components: {
-          "runoob": runoob
-        }
-      })
-    </script>
-  <script src="bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
-  <script src="bootstrap-4.3.1/popper.min.js "></script>
-  <script src="bootstrap-4.3.1/js/bootstrap.min.js "></script>
+  <!-- 底部导航 -->
+  <div id="nav_but">
+    <runoob id="a1"></runoob>
+  </div>
+  <script src="/component/nav-button.js"></script>
+  <script>
+    new Vue({
+      el: '#nav_but',
+      components: {
+        "runoob": runoob
+      }
+    })
+  </script>
+  <script src="/bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
+  <script src="/bootstrap-4.3.1/popper.min.js "></script>
+  <script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
 </body>
 
 </html>

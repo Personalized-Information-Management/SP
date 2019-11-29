@@ -4,9 +4,40 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.csuft.wxl.map.teacher.TCourseMap">
-	<select id="selectAllByTeacherId" resultType="Course" parameterType="Teacher">
+	<select id="selectAllByTeacherId_count" resultType="int"
+		parameterType="Teacher">
 		SELECT
-		id,course_time,course_name,course_introduce,course_photo,course_teacher
+		count(*)
 		FROM sp.course where course_teacher=#{id};
 	</select>
+	<!-- 更具id选择课程 -->
+	<select id="selectAllByTeacherId" resultType="Course"
+		parameterType="Teacher">
+		SELECT
+		id,course_time,course_name,course_introduce
+		FROM
+		sp.course where course_teacher=#{id}
+	</select>
+	<!-- 课程与消息 -->
+	<select id="selectNoticeCourseByNoticeId" parameterType="Notice"
+		resultType="Course">
+		SELECT *
+		FROM course where id=#{notice_courseid};
+	</select>
+	<select id="selectNoticeCourseByNoticeId_count"
+		parameterType="Notice" resultType="int">
+		SELECT count(*) FROM course where
+		id=#{notice_courseid};
+	</select>
+	<select id="selectCourseByCourseId" parameterType="Course"
+		resultType="Course">
+		SELECT * FROM course where
+		id=#{id};
+	</select>
+	<!-- 删除课程 -->
+	<delete id="deleteCourseById" parameterType="Course">
+		delete from course where id=#{id}
+	</delete>
+
+
 </mapper>

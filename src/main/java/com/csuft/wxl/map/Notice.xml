@@ -23,6 +23,26 @@
 		<result column="student_id" property="student_id" />
 		<result column="notice_read" property="notice_read" />
 	</resultMap>
+	<resultMap type="Course" id="NoticeByStudentId">
+		<id column="course_id" property="id"></id>
+		<result column="course_name" property="course_name" />
+		<collection property="notices" ofType="Notice">
+			<id column="id" property="id" />
+			<result column="notice_courseid" property="notice_courseid" />
+			<result column="notice_time" property="notice_time" />
+			<result column="notice_content" property="notice_content" />
+			<result column="course_timeout" property="timeout" />
+		</collection>
+	</resultMap>
+	<!-- 获取消息的条数 -->
+	<select id="selectNotice_count" resultType="int"
+		parameterType="Student">
+		select count(*) from (SELECT student_id,course_id FROM
+		student_course where student_id=#{id} and study=1) as course join
+		notice
+		on notice.notice_courseid=course.course_id
+	</select>
+	<!-- 根据是否在学习获取所有课程消息，获取所有消息 -->
 	<select id="selectNotice" resultMap="StudentNotice"
 		parameterType="Student">
 		select * from (SELECT student_id,course_id FROM
@@ -44,5 +64,28 @@
 		course2.notice_courseid=student_notice.notice_courseid and
 		course2.student_id=student_notice.student_id and
 		student_notice.nitice_id=course2.nitice_id
+	</select>
+	<select id="selectNoticeByStudent_id" parameterType="Student"
+		resultMap="NoticeByStudentId">
+		select * from notice join (select id course_id,course_name
+		from course join
+		(select course_id from student_course where study=1
+		and
+		student_id=#{id})as student on student.course_id=course.id)as
+		course on
+		course.course_id=notice.notice_courseid
+	</select>
+	<select id="selectNoticeByStudent_id_count" parameterType="Student"
+		resultType="int">
+		select count(*) from notice join (select id
+		course_id,course_name
+		from course join
+		(select course_id from
+		student_course where study=1
+		and
+		student_id=#{id})as student on
+		student.course_id=course.id)as
+		course on
+		course.course_id=notice.notice_courseid
 	</select>
 </mapper>

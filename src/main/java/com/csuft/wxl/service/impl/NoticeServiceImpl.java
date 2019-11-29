@@ -16,5 +16,10 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return noticeMap.selectNotice(student);
 	}
+	@Override
+	public int getNotic_count(Student student) {
+		// TODO Auto-generated method stub
+		return noticeMap.selectNotice_count(student);
+	}
 
 }

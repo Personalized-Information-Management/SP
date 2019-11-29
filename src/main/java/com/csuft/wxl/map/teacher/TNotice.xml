@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csuft.wxl.map.teacher.TNoticeMap">
+	<resultMap type="Course" id="CourseNotice">
+		<id column="course_id" property="id"></id>
+		<result column="course_name" property="course_name" />
+		<collection property="notices" ofType="Notice">
+			<id column="id" property="id" />
+			<result column="notice_courseid" property="notice_courseid" />
+			<result column="notice_time" property="notice_time" />
+			<result column="notice_content" property="notice_content" />
+			<result column="course_timeout" property="timeout" />
+		</collection>
+	</resultMap>
+	<!-- 教师id的课程消息集合 -->
+	<select id="selectNoticeByTeacher" parameterType="Teacher"
+		resultMap="CourseNotice">
+		select * from notice
+		join
+		(select id course_id,course_name
+		from course
+		where course_teacher=#{id})
+		course on
+		notice.notice_courseid=course.course_id
+	</select>
+	<!-- 教师id的课程消息集合 -->
+	<select id="selectNoticeByTeacher_count" parameterType="Teacher"
+		resultType="int">
+		select count(*) from notice
+		join
+		(select id course_id from
+		course
+		where course_teacher=#{id})
+		course on
+		notice.notice_courseid=course.course_id
+	</select>
+	<!-- 根据notice id删除 -->
+	<delete id="deleteNoticByNoticeId" parameterType="Notice">
+		DELETE FROM notice
+		where id=#{id}
+	</delete>
+	<!-- 插入一条消息 -->
+	<insert id="insertOneNotice" parameterType="Notice">
+		insert into
+		notice(notice_courseid,notice_time,notice_content)
+		values(#{notice_courseid},#{notice_time},#{notice_content})
+	</insert>
+</mapper>

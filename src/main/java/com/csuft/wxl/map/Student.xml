@@ -38,12 +38,35 @@
 		student_course.study=1 and
 		student.id=#{id}
 	</select>
+	<select id="selecStudyCourse_count" resultType="int"
+		parameterType="Student">
+		select count(*) from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.study=1 and
+		student.id=#{id}
+	</select>
+
 	<!-- 收藏的课程 -->
 	<select id="selectCollectCourseById" resultMap="StudentCourse"
 		parameterType="Student">
 		select student.id
 		id,course_id,course_name,course_photo,course_teacher,course_hour,teacher_name
 		course_teacher_name from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.collect=1 and
+		student.id=#{id}
+	</select>
+	<select id="selectCollectCourseById_count" resultType="int"
+		parameterType="Student">
+		select count(*) from
 		student join student_course on
 		student.id=student_course.student_id
 		join course on
@@ -66,6 +89,17 @@
 		student_course.study=2 and
 		student.id=#{id}
 	</select>
+	<select id="selectFinishCourseById_count" resultType="int"
+		parameterType="Student">
+		select count(*) from
+		student join student_course on
+		student.id=student_course.student_id
+		join course on
+		student_course.course_id=course.id join teacher on
+		course.course_teacher=teacher.id where
+		student_course.study=2 and
+		student.id=#{id}
+	</select>
 
 	<!-- 更具id获取学生的信息 -->
 	<select id="selectStudentById" parameterType="Student"
@@ -74,13 +108,15 @@
 	</select>
 
 	<update id="updateStudentById" parameterType="Student">
-		update student set student_name=#{student_name}, student_sex=#{student_sex},
+		update student set
+		student_name=#{student_name}, student_sex=#{student_sex},
 		student_col=#{student_col}, student_majo=#{student_majo},
 		student_phone=#{student_phone} where id=#{id}
 	</update>
 	<!-- 只是更新图片路径 -->
 	<update id="updateStudentPhotoById" parameterType="Student">
-		update student set seudent_photo=#{seudent_photo} where id=#{id}
+		update student
+		set seudent_photo=#{seudent_photo} where id=#{id}
 	</update>
 
 

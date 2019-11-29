@@ -1,5 +1,7 @@
 package com.csuft.wxl.pojo;
 
+import java.util.List;
+
 public class Course {
 	String id;// 课程编号
 	String course_name;// 课程名
@@ -13,7 +15,45 @@ public class Course {
 
 	String study;
 	String collect;
+
+	String course_folder;
+	// 课程状态，1在编辑
+	String course_state;
+	String course_content;
 	
+	List<Notice> notices;
+
+	public List<Notice> getNotices() {
+		return notices;
+	}
+
+	public void setNotices(List<Notice> notices) {
+		this.notices = notices;
+	}
+
+	public String getCourse_state() {
+		return course_state;
+	}
+
+	public void setCourse_state(String course_state) {
+		this.course_state = course_state;
+	}
+
+	public String getCourse_folder() {
+		return course_folder;
+	}
+
+	public void setCourse_folder(String course_folder) {
+		this.course_folder = course_folder;
+	}
+
+	public String getCourse_content() {
+		return course_content;
+	}
+
+	public void setCourse_content(String course_content) {
+		this.course_content = course_content;
+	}
 
 	public String getStudy() {
 		return study;
@@ -87,7 +127,6 @@ public class Course {
 		this.course_introduce = course_introduce;
 	}
 
-	
 	public String getCourse_photo() {
 		return course_photo;
 	}
@@ -96,14 +135,13 @@ public class Course {
 		this.course_photo = course_photo;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", course_name=" + course_name + ", course_introduce=" + course_introduce
 				+ ", course_photo=" + course_photo + ", course_teacher=" + course_teacher + ", course_time="
 				+ course_time + ", course_hour=" + course_hour + ", course_teacher_name=" + course_teacher_name
-				+ ", study=" + study + ", collect=" + collect + "]";
+				+ ", study=" + study + ", collect=" + collect + ", course_folder=" + course_folder + ", course_state="
+				+ course_state + ", course_content=" + course_content + ", notices=" + notices + "]";
 	}
 
 }

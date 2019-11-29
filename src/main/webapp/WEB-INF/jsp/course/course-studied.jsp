@@ -48,39 +48,39 @@
 </head>
 
 <body>
-  <!-- 导航栏 -->
-  <div>
-      <div class="container">
-        <br>
-        <a href="http://localhost:8080/zhuye">
-          <p><i><strong>个性化学习平台</strong></i></p>
-        </a>
-      </div>
-      <div class="container-fluid bg-info text-white">
-        <div class="container">
-          <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
-            <a class="navbar-brand">&nbsp;</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-              aria-controls="collapsibleNavId" aria-expanded="true" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse show" id="collapsibleNavId">
-              <div class="container ">
-                <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                  <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                  <li><a class="nav-link" href="/course">课程</a></li>
-                  <li><a class="nav-link" href="#">作业</a></li>
-                  <li><a class="nav-link" href="/notice">课程通知</a></li>
-                  <li><a class="nav-link" href="/dis">讨论区</a></li>
-                  <li><a class="nav-link" href="/logins">切换账号</a></li>
-                  <li><a class="nav-link " href="/logout">退出登录</a></li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+ <!-- 导航栏 -->
+ <div>
+  <div class="container">
+    <br> <a href="/zhuye">
+      <p>
+        <i><strong>个性化学习平台</strong></i>
+      </p>
+    </a>
+  </div>
+  <div class="container-fluid bg-info text-white">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
+        <a class="navbar-brand">&nbsp;</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+          aria-controls="collapsibleNavId" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse show" id="collapsibleNavId">
+          <div class="container ">
+            <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
+              <li class="nav-item active"><a class="nav-link" href="/zhuye">我的主页</a></li>
+              <li><a class="nav-link" href="/course">我的课程</a></li>
+              <li><a class="nav-link" href="/notice">课程通知</a></li>
+              <li><a class="nav-link" href="/dis">讨论圈子</a></li>
+              <li><a class="nav-link" href="/logins">切换账号</a></li>
+              <li><a class="nav-link " href="/logout">退出登录</a></li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </nav>
     </div>
+  </div>
+</div>
 
   <div class="container">
     <nav class="navbar-nav fixed-bottom " style="color: white;background: #000;height: 50px; ">
@@ -142,7 +142,7 @@
           </a>
               `
       })
-    var data = { site: ${ json }};
+    var data = { site: ${ data }};
     var m = new Vue(
       {
         el: '#abc',   //这是元素

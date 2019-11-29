@@ -1,0 +1,119 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>课程</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.min.css">
+    <script src="/js/vue.js"></script>
+    <style>
+        .ff {
+            font: 1.5em sans-serif;
+        }
+
+        .jx {
+            border-bottom: 2px solid #3b4d431e;
+            margin-top: 5px;
+        }
+
+        .bg {
+            margin-top: 50px;
+        }
+
+        /*与绿色边框的距离*/
+        .block1 {
+            width: 265px;
+            height: 287px;
+            margin: auto;
+            border: 1px solid #00ff73;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 导航栏 -->
+        <div>
+            <div class="container">
+                <br> <a href="/teacher/zhuye">
+                    <p>
+                        <i><strong>个性化学习平台</strong></i>
+                    </p>
+                </a>
+            </div>
+            <div class="container-fluid bg-info text-white">
+                <div class="container">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-info text-white">
+                        <a class="navbar-brand">&nbsp;</a>
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                            data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="true"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse show" id="collapsibleNavId">
+                            <div class="container ">
+                                <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
+                                    <li class="nav-item active"><a class="nav-link" href="/teacher/zhuye">主页</a></li>
+                                    <li><a class="nav-link" href="/teacher/course">课程管理</a></li>
+                                    <li><a class="nav-link" href="/teacher/course/notice-course">作业通知</a></li>
+                                    <li><a class="nav-link" href="">讨论圈子</a></li>
+                                    <li><a class="nav-link" href="">切换账号</a></li>
+                                    <li><a class="nav-link " href="">退出登录</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 导航块 -->
+        <div class="container">
+
+
+            <div class="container">
+
+                <div class="row my-1 col-lg-10">
+                    <div class="col-lg-2 col-md-4  col-sm-4 col-6" style="text-align: center;">
+                        <a href="/teacher/course/published"><img style="width: 100px;" src="/img/个人信息.png" alt="">
+                            <p>创建课程</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-6 " style="text-align: center;">
+                        <a href="/teacher/course/published-course"> <img style="width: 100px;" src="/img/课程管理.png" alt="">
+                            <p>查看已发布课程</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部导航 -->
+    <script src="/component/nav-button.js"></script>
+    <div id="nav_but">
+        <runoob id="a1"></runoob>
+    </div>
+    <script>
+        new Vue({
+            el: '#nav_but',
+            components: {
+                "runoob": runoob
+            }
+        })
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/bootstrap-4.3.1/jquery-3.3.1.slim.min.js "></script>
+    <script src="/bootstrap-4.3.1/popper.min.js "></script>
+    <script src="/bootstrap-4.3.1/js/bootstrap.min.js "></script>
+</body>
+
+</html>

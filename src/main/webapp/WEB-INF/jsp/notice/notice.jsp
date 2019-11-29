@@ -20,7 +20,7 @@
     <!-- 导航栏 -->
     <div>
         <div class="container">
-            <br> <a href="http://localhost:8080/zhuye">
+            <br> <a href="/zhuye">
                 <p>
                     <i><strong>个性化学习平台</strong></i>
                 </p>
@@ -38,55 +38,72 @@
                     <div class="navbar-collapse collapse show" id="collapsibleNavId">
                         <div class="container ">
                             <ul class="navbar-nav mr-auto row mt-2 mt-lg-0">
-                              <li class="nav-item active"><a class="nav-link" href="/zhuye">主页</a></li>
-                              <li><a class="nav-link" href="/course">课程</a></li>
-                              <li><a class="nav-link" href="#">作业</a></li>
-                              <li><a class="nav-link" href="/notice">课程通知</a></li>
-                              <li><a class="nav-link" href="/dis">讨论区</a></li>
-                              <li><a class="nav-link" href="/logins">切换账号</a></li>
-                              <li><a class="nav-link " href="/logout">退出登录</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="/zhuye">我的主页</a></li>
+                                <li><a class="nav-link" href="/course">我的课程</a></li>
+                                <li><a class="nav-link" href="/notice">课程通知</a></li>
+                                <li><a class="nav-link" href="/dis">讨论圈子</a></li>
+                                <li><a class="nav-link" href="/logins">切换账号</a></li>
+                                <li><a class="nav-link " href="/logout">退出登录</a></li>
                             </ul>
-                          </div>
+                        </div>
                     </div>
                 </nav>
             </div>
         </div>
     </div>
     <div class="container" id="app1">
-        <ol class="breadcrumb mt-4">
-            <li class="breadcrumb-item"><a href="#">主页</a></li>
-            <li class="breadcrumb-item active"><a>课程通知</a></li>
-            <div class="offset-5">未读消息：</div>
-        </ol>
-        <div v-for="item in items">
-            <div class="card mt-4">
-                <div class="card-header bg-secondary text-white" style="opacity: 0.8;">
-                    [课程通知]{{item.courses.course_name}}
-                    <div class="btn btn-info" style="float: right;" style="opacity: 0.9;">标记已读</div>
-                </div>
-                <div class="card-body" data-mrc>
-                    <p class="card-text" v-html="item.notices.notice_content"></p>
-                </div>
-                <div class="card-footer text-muted">
-                    {{item.notices.notice_time|timeTransform}}
+
+        <div class="row">
+            <div class="col-9">
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="#">主页</a></li>
+                    <li class="breadcrumb-item active"><a>来自课程的通知</a></li>
+                    <div class="offset-5" style="display: none;">未读消息：</div>
+                </ol>
+                <div v-for="(item, index) in items">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div>{{item.course_name}}</div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <div class="row">
+                                <div class="mx-4">发布的通知：{{item.notices.length}}</div>
+                                <a :href='"#demo"+index' data-toggle="collapse">展开</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div :id='"demo"+index' class="collapse mx-4">
+                        <div v-for="(item1, index1) in item.notices">
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <div v-html="item1.notice_content"></div>
+                                    <div>{{item1.notice_time|timeTransform}} </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var data =${json}
-        	var app = new Vue({
+        var data = { data: ${ data }};
+
+        // var data = { data: [{ "collect": null, "course_content": null, "course_folder": null, "course_hour": null, "course_introduce": null, "course_name": "数学", "course_photo": null, "course_state": null, "course_teacher": null, "course_teacher_name": null, "course_time": null, "id": "12", "notices": [{ "id": "18", "notice_content": "<p>数学的第一条通知</p>", "notice_courseName": null, "notice_courseid": "12", "notice_read": null, "notice_time": "1574955913866", "student_id": null, "timeout": null }, { "id": "19", "notice_content": "<p>数学的第二条通知</p>", "notice_courseName": null, "notice_courseid": "12", "notice_read": null, "notice_time": "1574955927758", "student_id": null, "timeout": null }, { "id": "20", "notice_content": "<p>数学的第三条通知</p>", "notice_courseName": null, "notice_courseid": "12", "notice_read": null, "notice_time": "1574955948102", "student_id": null, "timeout": null }], "study": null }, { "collect": null, "course_content": null, "course_folder": null, "course_hour": null, "course_introduce": null, "course_name": "数据结构", "course_photo": null, "course_state": null, "course_teacher": null, "course_teacher_name": null, "course_time": null, "id": "11", "notices": [{ "id": "21", "notice_content": "<p>数据结构第一条消息</p>", "notice_courseName": null, "notice_courseid": "11", "notice_read": null, "notice_time": "1574956132451", "student_id": null, "timeout": null }, { "id": "22", "notice_content": "<p>数据结构第二条消息</p>", "notice_courseName": null, "notice_courseid": "11", "notice_read": null, "notice_time": "1574956143793", "student_id": null, "timeout": null }, { "id": "23", "notice_content": "<p>数据结构第三条消息</p>", "notice_courseName": null, "notice_courseid": "11", "notice_read": null, "notice_time": "1574956158552", "student_id": null, "timeout": null }], "study": null }] };
+
+        var app = new Vue({
             el: "#app1",
             data: {
-                items: data,
+                items: data.data,
             },
             filters: {
                 timeTransform: function (value) {
                     var str = value + "000000000000000000000000000000000000000000000000000000000000000";
                     a = new Date(Number(str.substr(0, 13)));
-                    return a.getFullYear() + '年' + a.getMonth() + "月" + a.getDate() + " " + a.getHours() + ":" + a.getMinutes();
+                    return a.getFullYear() + '年' + a.getMonth() + "月" + a.getDate();
                 }
             },
+
         })
     </script>
 
